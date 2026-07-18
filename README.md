@@ -13,7 +13,7 @@ most post generators spit out stuff that reads like a bot wrote it. em dashes ev
 - templates: free, instant, offline. a proven set of viral structures with your topic and specifics slotted in. no key, nothing to set up.
 - AI (gemini): paste a free gemini key in settings and it writes each post fresh for your topic, no repetition. the same voice rules go into the prompt (no em dashes, no robot words) and the scrubber runs on top of whatever the model returns, so the AI output stays clean too.
 
-the key is stored only in your browser and the request goes straight to google, never to any server of mine. get a free key at aistudio.google.com/apikey. gemini 2.5 flash and flash-lite are on the free tier.
+the key is stored only in your browser and the request goes straight to google, never to any server of mine. get a free key at aistudio.google.com/apikey. it uses gemini 3.x flash models (free tier) and falls back automatically if one is gated for new keys.
 
 ## what's inside
 
