@@ -406,7 +406,7 @@
     <div class="book-body"><div class="rules" id="rules"></div></div>
   </details>
 
-  <p class="foot">templates run free and offline. add a gemini key in settings and the AI writes each post fresh for your topic.<br>everything in the preview is editable, so tweak it in your own voice before it goes out.</p>
+  <p class="foot">templates run free and offline. add a key in settings (gemini or openrouter) and the AI writes each post fresh.<br>everything in the preview is editable, so tweak it in your own voice before it goes out.</p>
 </div>
 
 <div class="modal" id="modal">
@@ -802,6 +802,28 @@
     return L.join("\n");
   }
 
+  // not every openrouter model can see images. walk a ladder: the user's pick, then a good cheap
+  // vision model, then free vision models, until one reads the screenshot.
+  var OR_VISION_LADDER=["openai/gpt-4o-mini","google/gemma-4-26b-a4b-it:free","nvidia/nemotron-nano-12b-v2-vl:free"];
+  function orVision(promptText, img, ladder, i, firstErr){
+    if(i>=ladder.length) return Promise.reject(firstErr||new Error("none of the available models could read the image"));
+    var noJson=/:free$/.test(ladder[i]); // free endpoints often reject structured-output mode
+    return callOpenRouter(promptText, ladder[i], state.orKey, noJson, img).then(function(posts){
+      if(i>0) toast("read with "+ladder[i].split("/").pop());
+      return posts;
+    }).catch(function(err){
+      if(/did not accept that key|sk-or-/i.test((err&&err.message)||"")) throw err; // bad key, no point walking on
+      return orVision(promptText, img, ladder, i+1, firstErr||err);
+    });
+  }
+  function aiGenerateVision(promptText, img){
+    if(!img) return aiGenerate(promptText);
+    if(state.provider==="openrouter"){
+      var ladder=[state.orModel].concat(OR_VISION_LADDER).filter(function(m,idx,a){ return m && a.indexOf(m)===idx; });
+      return orVision(promptText, img, ladder, 0, null);
+    }
+    return aiGenerate(promptText, img); // gemini 3.x flash models all read images
+  }
   function generateOpp(){
     if(state.busy) return;
     var text=$("oppText").value.trim();
@@ -809,7 +831,7 @@
     var hasSrc=!!(oppImg||text);
     if(hasSrc && currentKey()){
       state.gen++; setBusy(true);
-      aiGenerate(buildOppPrompt(!!oppImg, text), oppImg).then(function(posts){
+      aiGenerateVision(buildOppPrompt(!!oppImg, text), oppImg).then(function(posts){
         var extracted=posts.link||"";
         var clean=posts.map(sanitize).filter(Boolean);
         if(!clean.length) throw new Error("the model returned an empty post, try again");
@@ -990,7 +1012,8 @@
     var svg=$("genBtn").querySelector("svg"); if(svg) svg.style.display=on?"none":"";
     var old=$("genBtn").querySelector(".spin"); if(old) old.parentNode.removeChild(old);
     if(on){ var s=document.createElement("span"); s.className="spin"; $("genBtn").insertBefore(s,$("genLabel"));
-      $("tweets").innerHTML="<div class='skel-note'><span class='spin' style='border-color:color-mix(in srgb,var(--accent) 40%,transparent);border-top-color:var(--accent)'></span>gemini is writing this...</div><div class='skelwrap'><div class='skel'></div><div class='skel'></div><div class='skel short'></div></div>";
+      var writer = state.provider==="openrouter" ? String(state.orModel||"the model").split("/").pop().replace(/:free$/,"") : (state.model||"gemini");
+      $("tweets").innerHTML="<div class='skel-note'><span class='spin' style='border-color:color-mix(in srgb,var(--accent) 40%,transparent);border-top-color:var(--accent)'></span>"+escapeHtml(writer)+" is writing this...</div><div class='skelwrap'><div class='skel'></div><div class='skel'></div><div class='skel short'></div></div>";
       $("threadTools").hidden=true; $("replyHint").innerHTML="";
     }
   }
