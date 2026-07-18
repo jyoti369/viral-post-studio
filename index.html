@@ -5,64 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>PostLab - viral X post studio</title>
-<meta name="description" content="Turn any topic into a viral X post or thread using proven 2026 templates, with a live reach-signal score and a built-in AI-tell guard.">
+<meta name="description" content="Turn any topic into a viral X post or thread. Proven 2026 templates or your own Gemini key for fresh AI writing, with a live reach-signal score and a built-in AI-tell guard.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PostLab - viral X post studio">
-<meta property="og:description" content="Topic in, viral X post out. Proven 2026 templates, a live reach-signal score, and no robot voice.">
+<meta property="og:description" content="Topic in, viral X post out. Templates or bring-your-own Gemini, a reach signal score, and no robot voice.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-</head>
-<body>
 <style>
   :root{
-    /* light theme (base) */
-    --bg:#EFF3F2;
-    --bg-2:#FFFFFF;
-    --bg-3:#E7EDEC;
-    --bg-4:#DCE5E3;
-    --line:#CDD9D7;
-    --line-soft:#DEE7E5;
-    --text:#0C1517;
-    --muted:#4B6360;
-    --faint:#7A908D;
-    --accent:#FF9E1B;
-    --accent-2:#FFB84D;
-    --accent-ink:#241300;
-    --accent-text:#8A5200;
-    --good:#0E9E63;
-    --good-bg:#DCF3E7;
-    --warn:#B5720A;
-    --warn-bg:#F7EAD2;
-    --bad:#C4442B;
-    --bad-bg:#F7E1DB;
-    --shadow:0 1px 2px rgba(12,21,23,.06),0 12px 30px rgba(12,21,23,.07);
-    --shadow-lg:0 24px 60px rgba(12,21,23,.14);
-    --radius:16px;
-    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --bg:#EFF3F2;--bg-2:#FFFFFF;--bg-3:#E7EDEC;--bg-4:#DCE5E3;--line:#CDD9D7;--line-soft:#DEE7E5;
+    --text:#0C1517;--muted:#4B6360;--faint:#7A908D;--accent:#FF9E1B;--accent-2:#FFB84D;--accent-ink:#241300;
+    --accent-text:#8A5200;--good:#0E9E63;--good-bg:#DCF3E7;--warn:#B5720A;--warn-bg:#F7EAD2;--bad:#C4442B;--bad-bg:#F7E1DB;
+    --shadow:0 1px 2px rgba(12,21,23,.06),0 12px 30px rgba(12,21,23,.07);--shadow-lg:0 24px 60px rgba(12,21,23,.14);
+    --radius:16px;--mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
   }
   @media (prefers-color-scheme:dark){
     :root{
-      --bg:#0A1416;
-      --bg-2:#0F1E21;
-      --bg-3:#142A2E;
-      --bg-4:#1B363B;
-      --line:#22403F;
-      --line-soft:#1A3235;
-      --text:#E8F1EF;
-      --muted:#8AA5A2;
-      --faint:#5F7E7B;
-      --accent:#FFAE33;
-      --accent-2:#FFC468;
-      --accent-ink:#231400;
-      --accent-text:#FFC061;
-      --good:#4FD08A;
-      --good-bg:#123227;
-      --warn:#F0B24B;
-      --warn-bg:#2E2612;
-      --bad:#F2795F;
-      --bad-bg:#331C18;
-      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.35);
-      --shadow-lg:0 30px 70px rgba(0,0,0,.55);
+      --bg:#0A1416;--bg-2:#0F1E21;--bg-3:#142A2E;--bg-4:#1B363B;--line:#22403F;--line-soft:#1A3235;
+      --text:#E8F1EF;--muted:#8AA5A2;--faint:#5F7E7B;--accent:#FFAE33;--accent-2:#FFC468;--accent-ink:#231400;
+      --accent-text:#FFC061;--good:#4FD08A;--good-bg:#123227;--warn:#F0B24B;--warn-bg:#2E2612;--bad:#F2795F;--bad-bg:#331C18;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px rgba(0,0,0,.35);--shadow-lg:0 30px 70px rgba(0,0,0,.55);
     }
   }
   :root[data-theme="dark"]{
@@ -81,54 +43,38 @@
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
-    background:
-      radial-gradient(1200px 600px at 88% -8%, color-mix(in srgb,var(--accent) 12%, transparent), transparent 60%),
-      var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    font-size:15px;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-    min-height:100vh;
+    background:radial-gradient(1200px 600px at 88% -8%, color-mix(in srgb,var(--accent) 12%, transparent), transparent 60%),var(--bg);
+    color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;min-height:100vh;
   }
   ::selection{background:color-mix(in srgb,var(--accent) 40%, transparent)}
   button{font-family:inherit}
   input,textarea,select{font-family:inherit}
+  a{color:var(--accent-text)}
 
   .wrap{max-width:1220px;margin:0 auto;padding:20px 22px 56px}
 
-  /* ---------- top bar ---------- */
   .top{display:flex;align-items:center;gap:14px;padding:6px 2px 20px}
   .brand{display:flex;align-items:center;gap:11px;min-width:0}
-  .mark{
-    width:38px;height:38px;border-radius:11px;flex:none;
-    background:linear-gradient(150deg,var(--accent),var(--accent-2));
-    display:grid;place-items:center;color:var(--accent-ink);
-    box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 45%, transparent);
-    font-weight:800;
-  }
+  .mark{width:38px;height:38px;border-radius:11px;flex:none;background:linear-gradient(150deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;color:var(--accent-ink);box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 45%, transparent);font-weight:800}
   .mark svg{width:21px;height:21px}
   .brand h1{font-size:18px;font-weight:750;letter-spacing:-.02em;margin:0;line-height:1.05}
   .brand p{margin:1px 0 0;font-size:12.5px;color:var(--muted);letter-spacing:.01em}
   .spacer{flex:1}
-  .ghost{
-    display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;
-    background:var(--bg-2);border:1px solid var(--line);color:var(--text);cursor:pointer;
-    font-size:13px;font-weight:600;transition:background .15s,border-color .15s,transform .05s;
-  }
+  .ghost{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:10px;background:var(--bg-2);
+    border:1px solid var(--line);color:var(--text);cursor:pointer;font-size:13px;font-weight:600;transition:background .15s,border-color .15s,transform .05s}
   .ghost:hover{background:var(--bg-3);border-color:var(--faint)}
   .ghost:active{transform:translateY(1px)}
   .ghost svg{width:16px;height:16px;opacity:.85}
+  .ghost.icon{padding:0;width:36px;justify-content:center}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+  .dot.on{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%, transparent)}
 
-  /* ---------- layout ---------- */
   .grid{display:grid;grid-template-columns:minmax(0,410px) minmax(0,1fr);gap:22px;align-items:start}
   @media (max-width:920px){.grid{grid-template-columns:1fr}}
 
-  .panel{
-    background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow);
-  }
+  .panel{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
   .panel.controls{padding:18px 18px 20px;position:sticky;top:16px}
   @media (max-width:920px){.panel.controls{position:static}}
 
@@ -138,42 +84,34 @@
   label.lb{display:block;font-size:12.5px;font-weight:650;color:var(--muted);margin:0 0 6px}
   label.lb .hint{font-weight:500;color:var(--faint)}
 
-  .topic{
-    width:100%;background:var(--bg-3);border:1.5px solid var(--line);border-radius:12px;
-    color:var(--text);font-size:17px;font-weight:600;padding:13px 14px;letter-spacing:-.01em;
-    transition:border-color .15s,background .15s,box-shadow .15s;
-  }
+  .topic{width:100%;background:var(--bg-3);border:1.5px solid var(--line);border-radius:12px;color:var(--text);font-size:17px;
+    font-weight:600;padding:13px 14px;letter-spacing:-.01em;transition:border-color .15s,background .15s,box-shadow .15s}
   .topic::placeholder{color:var(--faint);font-weight:500}
   .topic:focus{outline:none;border-color:var(--accent);background:var(--bg-2);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%, transparent)}
   .shake{animation:shake .4s}
   @keyframes shake{10%,90%{transform:translateX(-1px)}30%,70%{transform:translateX(3px)}50%{transform:translateX(-5px)}}
 
-  .inp,.ta{
-    width:100%;background:var(--bg-3);border:1px solid var(--line);border-radius:10px;
-    color:var(--text);font-size:14px;padding:10px 12px;transition:border-color .15s,box-shadow .15s;
-  }
+  .inp,.ta{width:100%;background:var(--bg-3);border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:14px;
+    padding:10px 12px;transition:border-color .15s,box-shadow .15s}
   .ta{resize:vertical;min-height:74px;line-height:1.45}
   .inp::placeholder,.ta::placeholder{color:var(--faint)}
   .inp:focus,.ta:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%, transparent)}
 
-  /* segmented */
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--bg-3);border:1px solid var(--line);border-radius:12px;padding:4px}
-  .seg button{
-    appearance:none;border:0;background:transparent;color:var(--muted);cursor:pointer;
-    padding:9px 8px;border-radius:9px;font-weight:650;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:7px;
-    transition:color .15s;
-  }
+  .seg button{appearance:none;border:0;background:transparent;color:var(--muted);cursor:pointer;padding:9px 8px;border-radius:9px;
+    font-weight:650;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:7px;transition:color .15s}
   .seg button svg{width:15px;height:15px}
   .seg button[aria-selected="true"]{background:var(--bg-2);color:var(--text);box-shadow:var(--shadow)}
   :root[data-theme="dark"] .seg button[aria-selected="true"]{background:var(--bg-4)}
   @media (prefers-color-scheme:dark){.seg button[aria-selected="true"]{background:var(--bg-4)}}
+  .seg.mini button{padding:8px 6px;font-size:12.5px;gap:6px}
+  .mode-hint{font-size:12px;color:var(--faint);margin-top:7px;line-height:1.45}
+  .mode-hint b{color:var(--accent-text);font-weight:650}
 
-  select.sel{
-    width:100%;appearance:none;background:var(--bg-3);border:1px solid var(--line);border-radius:10px;
-    color:var(--text);font-size:14px;font-weight:600;padding:11px 38px 11px 12px;cursor:pointer;
+  select.sel{width:100%;appearance:none;background:var(--bg-3);border:1px solid var(--line);border-radius:10px;color:var(--text);
+    font-size:14px;font-weight:600;padding:11px 38px 11px 12px;cursor:pointer;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A908D' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
-    background-repeat:no-repeat;background-position:right 12px center;
-  }
+    background-repeat:no-repeat;background-position:right 12px center}
   select.sel:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%, transparent)}
 
   .why{margin-top:9px;font-size:12.5px;line-height:1.5;color:var(--muted);background:var(--bg-3);border-left:2.5px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 11px}
@@ -185,35 +123,33 @@
   @media (max-width:470px){.two{grid-template-columns:1fr}}
 
   .actions{display:flex;gap:9px;margin-top:19px}
-  .btn{
-    flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:12px;
-    border:0;cursor:pointer;font-weight:750;font-size:15px;letter-spacing:-.01em;transition:transform .06s,filter .15s,background .15s;
-  }
+  .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:12px;border:0;cursor:pointer;
+    font-weight:750;font-size:15px;letter-spacing:-.01em;transition:transform .06s,filter .15s,background .15s}
   .btn svg{width:17px;height:17px}
   .btn.primary{background:linear-gradient(160deg,var(--accent),var(--accent-2));color:var(--accent-ink);box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 40%, transparent)}
   .btn.primary:hover{filter:brightness(1.04)}
   .btn.primary:active{transform:translateY(1px)}
+  .btn.primary[disabled]{opacity:.75;cursor:default;filter:saturate(.7)}
   .btn.sub{flex:none;width:46px;background:var(--bg-3);border:1px solid var(--line);color:var(--text)}
   .btn.sub:hover{background:var(--bg-4)}
   .btn.sub:active{transform:translateY(1px)}
+  .btn.sub[disabled]{opacity:.5;cursor:default}
+  .spin{width:16px;height:16px;border-radius:50%;border:2px solid color-mix(in srgb,var(--accent-ink) 30%, transparent);border-top-color:var(--accent-ink);animation:spin .7s linear infinite;display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
   .kbd{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center;margin-top:11px}
   .kbd b{color:var(--muted);font-weight:600}
 
-  /* ---------- output side ---------- */
   .stack{display:flex;flex-direction:column;gap:18px}
-
   .preview{padding:16px 16px 18px}
   .pv-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-  .avatar{width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:750;font-size:18px;
-    background:linear-gradient(140deg,#5b7cff,#9b5bff)}
+  .avatar{width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:750;font-size:18px;background:linear-gradient(140deg,#5b7cff,#9b5bff)}
   .who{min-width:0;flex:1}
   .who .nm{font-weight:750;font-size:14.5px;letter-spacing:-.01em;display:flex;align-items:center;gap:5px}
   .who .nm svg{width:15px;height:15px;color:#1d9bf0}
   .handle-in{background:transparent;border:0;color:var(--muted);font-size:13px;padding:1px 0;width:100%;max-width:200px}
   .handle-in:focus{outline:none;color:var(--text)}
-  .pv-badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);
-    background:color-mix(in srgb,var(--accent) 15%, transparent);padding:5px 9px;border-radius:999px;flex:none}
+  .pv-badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);background:color-mix(in srgb,var(--accent) 15%, transparent);padding:5px 9px;border-radius:999px;flex:none}
 
   .thread-tools{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
   .tcount{font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -231,8 +167,7 @@
   .tweet.threaded{padding-left:34px}
   .tweet.threaded::before{content:"";position:absolute;left:15px;top:30px;bottom:-2px;width:2px;background:var(--line)}
   .tweet.threaded:last-child::before{display:none}
-  .tnum{position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--bg-3);border:1px solid var(--line);
-    display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted);z-index:1}
+  .tnum{position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--bg-3);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted);z-index:1}
   .tbody{background:var(--bg-3);border:1px solid var(--line-soft);border-radius:14px;padding:12px 13px 10px;transition:border-color .15s,box-shadow .15s}
   .tbody:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%, transparent)}
   .ttext{white-space:pre-wrap;word-break:break-word;font-size:15.5px;line-height:1.52;color:var(--text);letter-spacing:-.005em;min-height:24px}
@@ -242,8 +177,7 @@
   .cc{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
   .cc.warn{color:var(--warn)}
   .cc.bad{color:var(--bad)}
-  .mini{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:8px;
-    background:transparent;border:1px solid var(--line);color:var(--muted);cursor:pointer;font-size:12px;font-weight:600;transition:all .13s}
+  .mini{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:8px;background:transparent;border:1px solid var(--line);color:var(--muted);cursor:pointer;font-size:12px;font-weight:600;transition:all .13s}
   .mini:hover{color:var(--text);border-color:var(--faint);background:var(--bg-2)}
   .mini svg{width:13px;height:13px}
   .mini.done{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%, transparent)}
@@ -253,7 +187,20 @@
   .reply-hint .rh-t svg{width:13px;height:13px}
   .reply-hint .rh-b{font-size:14px;color:var(--text);white-space:pre-wrap;word-break:break-word}
 
-  /* signal panel */
+  .skelwrap{display:flex;flex-direction:column;gap:10px;padding:4px 0}
+  .skel{height:56px;border-radius:14px;background:linear-gradient(100deg,var(--bg-3) 30%,var(--bg-4) 50%,var(--bg-3) 70%);background-size:200% 100%;animation:sh 1.2s linear infinite}
+  .skel.short{width:60%}
+  .skel-note{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:9px;padding:2px 2px 6px}
+  @keyframes sh{to{background-position:-200% 0}}
+
+  .errcard{background:var(--bad-bg);border:1px solid color-mix(in srgb,var(--bad) 40%, transparent);border-radius:14px;padding:14px 15px}
+  .errcard .ec-t{font-weight:750;color:var(--bad);font-size:14px;margin-bottom:5px;display:flex;align-items:center;gap:7px}
+  .errcard .ec-t svg{width:16px;height:16px}
+  .errcard .ec-m{font-size:13.5px;color:var(--text);line-height:1.5;word-break:break-word}
+  .errcard .ec-a{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .errcard .ec-a button{height:32px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg-2);color:var(--text);font-weight:600;font-size:12.5px;cursor:pointer}
+  .errcard .ec-a button:hover{border-color:var(--faint)}
+
   .sig{padding:16px}
   .sig-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
   .score{font-family:var(--mono);font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
@@ -276,7 +223,6 @@
   .chk.warn{background:var(--warn-bg)}
   .chk.bad{background:var(--bad-bg)}
 
-  /* playbook */
   .book{margin-top:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-2);overflow:hidden}
   .book summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;gap:11px;font-weight:700;font-size:14.5px;letter-spacing:-.01em}
   .book summary::-webkit-details-marker{display:none}
@@ -294,100 +240,101 @@
   .rule .rt b{font-weight:700}
   .foot{margin-top:22px;text-align:center;font-size:12px;color:var(--faint);line-height:1.6}
 
-  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg-2);
-    padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;
-    transition:opacity .2s,transform .2s;z-index:50;display:flex;align-items:center;gap:9px}
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.open{display:flex}
+  .modal-bg{position:absolute;inset:0;background:rgba(4,10,11,.55)}
+  .modal-card{position:relative;width:min(520px,100%);background:var(--bg-2);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);padding:22px;max-height:90vh;overflow:auto}
+  .modal-card h2{margin:0 0 4px;font-size:18px;letter-spacing:-.02em}
+  .modal-card .sub{margin:0 0 16px;font-size:13px;color:var(--muted);line-height:1.5}
+  .modal-card .sub a{font-weight:650}
+  .mclose{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg-3);color:var(--muted);cursor:pointer;display:grid;place-items:center}
+  .mclose:hover{color:var(--text)}
+  .mclose svg{width:15px;height:15px}
+  .keyrow{display:flex;gap:8px}
+  .keyrow .inp{font-family:var(--mono);font-size:13px}
+  .showbtn{flex:none;width:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg-3);color:var(--muted);cursor:pointer;display:grid;place-items:center}
+  .showbtn:hover{color:var(--text)}
+  .showbtn svg{width:16px;height:16px}
+  .mrow{display:flex;gap:8px;margin-top:12px;align-items:center}
+  .mstatus{font-size:12.5px;margin-top:12px;min-height:18px;line-height:1.45}
+  .mstatus.good{color:var(--good)}
+  .mstatus.bad{color:var(--bad)}
+  .mstatus.muted{color:var(--muted)}
+  .mbtn{height:40px;padding:0 15px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:13.5px}
+  .mbtn.primary{background:linear-gradient(160deg,var(--accent),var(--accent-2));color:var(--accent-ink)}
+  .mbtn.primary[disabled]{opacity:.7;cursor:default}
+  .mbtn.ghost{background:var(--bg-3);border:1px solid var(--line);color:var(--text)}
+  .mnote{font-size:11.5px;color:var(--faint);margin-top:14px;line-height:1.5;border-top:1px solid var(--line-soft);padding-top:12px}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg-2);padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70;display:flex;align-items:center;gap:9px}
   .toast svg{width:16px;height:16px;color:var(--good)}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <div class="mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z"/></svg>
-      </div>
-      <div>
-        <h1>PostLab</h1>
-        <p>topic in, viral X post out. no em dashes, no robot voice.</p>
-      </div>
+      <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z"/></svg></div>
+      <div><h1>PostLab</h1><p>topic in, viral X post out. no em dashes, no robot voice.</p></div>
     </div>
     <div class="spacer"></div>
-    <button class="ghost" id="themeBtn" title="Switch theme">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <span id="themeLabel">Dark</span>
-    </button>
+    <button class="ghost" id="settingsBtn" title="AI writer settings"><span class="dot" id="engDot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span id="engLabel">Templates</span></button>
+    <button class="ghost icon" id="themeBtn" title="Switch theme"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
   </header>
 
   <div class="grid">
-    <!-- ================= CONTROLS ================= -->
     <section class="panel controls">
       <p class="eyebrow">Compose</p>
-
       <div class="field">
         <label class="lb" for="topic">What is it about?</label>
         <input id="topic" class="topic" placeholder="cold email, learning python, hiring, your launch..." autocomplete="off" spellcheck="false">
       </div>
-
       <div class="field">
         <label class="lb">Format</label>
         <div class="seg" role="tablist" id="formatSeg">
-          <button role="tab" aria-selected="true" data-fmt="single">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>
-            Single post
-          </button>
-          <button role="tab" aria-selected="false" data-fmt="thread">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="10.5" width="18" height="6" rx="1.5"/><rect x="7" y="18" width="14" height="3.5" rx="1.5"/></svg>
-            Thread
-          </button>
+          <button role="tab" aria-selected="true" data-fmt="single"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>Single post</button>
+          <button role="tab" aria-selected="false" data-fmt="thread"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="10.5" width="18" height="6" rx="1.5"/><rect x="7" y="18" width="14" height="3.5" rx="1.5"/></svg>Thread</button>
         </div>
       </div>
-
       <div class="field">
         <label class="lb" for="tmpl">Viral template</label>
         <select id="tmpl" class="sel"></select>
         <div class="why" id="why"></div>
       </div>
-
       <div class="field extra" id="extra"></div>
-
-      <div class="actions">
-        <button class="btn primary" id="genBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3z"/></svg>
-          Generate
-        </button>
-        <button class="btn sub" id="shuffleBtn" title="New wording, same inputs">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
-        </button>
+      <div class="field">
+        <label class="lb">Writer</label>
+        <div class="seg mini" id="engineSeg">
+          <button data-eng="template" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Templates</button>
+          <button data-eng="ai" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15z"/></svg>AI (Gemini)</button>
+        </div>
+        <div class="mode-hint" id="modeHint"></div>
       </div>
-      <p class="kbd"><b>Cmd/Ctrl + Enter</b> to generate  ·  shuffle for a fresh variation</p>
+      <div class="actions">
+        <button class="btn primary" id="genBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3z"/></svg><span id="genLabel">Generate</span></button>
+        <button class="btn sub" id="shuffleBtn" title="New variation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      </div>
+      <p class="kbd"><b>Cmd/Ctrl + Enter</b> to generate</p>
     </section>
 
-    <!-- ================= OUTPUT ================= -->
     <section class="stack">
       <div class="panel preview">
         <div class="pv-head">
           <div class="avatar" id="avatar">Y</div>
           <div class="who">
-            <div class="nm">Your name
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.16-.032.322-.032.487 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.438-2.25.416.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.164-.012-.328-.033-.487 1.158-.687 1.943-1.99 1.943-3.484z"/></svg>
-            </div>
+            <div class="nm">Your name<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.16-.032.322-.032.487 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.438-2.25.416.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.164-.012-.328-.033-.487 1.158-.687 1.943-1.99 1.943-3.484z"/></svg></div>
             <input class="handle-in" id="handle" value="@yourhandle" spellcheck="false" aria-label="Your handle">
           </div>
           <span class="pv-badge" id="fmtBadge">Single</span>
         </div>
-
         <div class="thread-tools" id="threadTools" hidden>
           <span class="tcount" id="tcount">0 posts</span>
           <label class="toggle"><input type="checkbox" id="numberToggle"><span class="sw"></span> number them (1/)</label>
-          <button class="mini copyall" id="copyAll">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy thread
-          </button>
+          <button class="mini copyall" id="copyAll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy thread</button>
         </div>
-
         <div class="tweets" id="tweets"></div>
         <div id="replyHint"></div>
       </div>
@@ -408,17 +355,39 @@
   </div>
 
   <details class="book">
-    <summary>
-      <span class="bk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-      The 2026 reach playbook
-      <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
-    </summary>
-    <div class="book-body">
-      <div class="rules" id="rules"></div>
-    </div>
+    <summary><span class="bk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>The 2026 reach playbook<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+    <div class="book-body"><div class="rules" id="rules"></div></div>
   </details>
 
-  <p class="foot">the tool writes the structure and the hook. you drop in the real numbers and hit post.<br>everything in the preview is editable, so tweak it in your own voice before it goes out.</p>
+  <p class="foot">templates run free and offline. add a gemini key in settings and the AI writes each post fresh for your topic.<br>everything in the preview is editable, so tweak it in your own voice before it goes out.</p>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-card">
+    <button class="mclose" id="modalClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <h2>AI writer (optional)</h2>
+    <p class="sub">paste a free Gemini API key and the tool writes each post fresh for your topic instead of using templates. get one in a minute at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>. gemini 2.5 flash and flash-lite are on the free tier.</p>
+    <label class="lb" for="keyInput">Gemini API key</label>
+    <div class="keyrow">
+      <input id="keyInput" class="inp" type="password" placeholder="AIza..." autocomplete="off" spellcheck="false">
+      <button class="showbtn" id="showKey" title="Show/hide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <div class="mrow">
+      <button class="mbtn primary" id="saveKey">Save and test</button>
+      <button class="mbtn ghost" id="clearKey">Clear</button>
+    </div>
+    <div class="mstatus muted" id="mstatus">not connected. the tool falls back to templates.</div>
+    <div class="field" style="margin-top:16px">
+      <label class="lb" for="modelSel">Model</label>
+      <select id="modelSel" class="sel">
+        <option value="gemini-2.5-flash">gemini-2.5-flash (free, recommended)</option>
+        <option value="gemini-2.5-flash-lite">gemini-2.5-flash-lite (free, highest limits)</option>
+        <option value="gemini-2.5-pro">gemini-2.5-pro (free, slower)</option>
+      </select>
+    </div>
+    <p class="mnote">your key is stored only in this browser (localStorage) and is sent straight to Google when you generate, never to me or any other server. the free tier has daily limits, so if you see a quota error just wait a bit or switch to flash-lite.</p>
+  </div>
 </div>
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg">Copied</span></div>
@@ -427,24 +396,15 @@
 (function(){
   "use strict";
 
-  /* ---------------- helpers ---------------- */
-  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"" };
+  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", key:"", model:"gemini-2.5-flash", busy:false };
   var $ = function(id){ return document.getElementById(id); };
   function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
-  function splitPoints(str){
-    return (str||"").split("\n").map(function(s){ return s.replace(/^[\-\*•→\d.\)\s]+/,"").trim(); }).filter(Boolean);
-  }
-  // deterministic-but-rotating picker: bumps with each generate, offset keeps banks out of lockstep
-  function makePick(seed){
-    return function(arr, off){ return arr[(seed + (off||0)) % arr.length]; };
-  }
-  // safety net: strip anything that reads AI-authored, even though the banks avoid it
-  var BANNED = ["delve","leverage","utilize","robust","seamless","comprehensive","elevate","unlock","boasts","testament","realm","landscape","tapestry","furthermore","moreover","in conclusion","in today's","game-changer","supercharge","harness the power"];
-  function sanitize(str){
-    return str.replace(/[—–]/g,"-").replace(/[ \t]{2,}/g," ").replace(/ +\n/g,"\n");
-  }
+  function splitPoints(str){ return (str||"").split("\n").map(function(s){ return s.replace(/^[\-\*•→\d.\)\s]+/,"").trim(); }).filter(Boolean); }
+  function makePick(seed){ return function(arr, off){ return arr[(seed + (off||0)) % arr.length]; }; }
 
-  /* ---------------- field registry ---------------- */
+  var BANNED = ["delve","leverage","utilize","robust","seamless","comprehensive","elevate","unlock","boasts","testament","realm","landscape","tapestry","furthermore","moreover","in conclusion","in today's","game-changer","supercharge","harness the power"];
+  function sanitize(str){ return String(str).replace(/[—–]/g,"-").replace(/[ \t]{2,}/g," ").replace(/ +\n/g,"\n").trim(); }
+
   var FIELDS = {
     before:{label:"where you started", ph:"500 followers"},
     after:{label:"where you are now", ph:"52k followers"},
@@ -459,7 +419,6 @@
     includes:{type:"ta", label:"what the work includes", hint:"one per line", ph:"building MCP servers\nintegrating apps with AI workflows"}
   };
 
-  /* ---------------- CTA builder (thread last tweet) ---------------- */
   function CTA(t,f,p,h){
     var link = f.link ? ("\n\n"+f.link) : "";
     return p([
@@ -469,441 +428,404 @@
     ], 3);
   }
 
-  /* ---------------- templates ---------------- */
   var SINGLE = [
     { id:"hot-take", name:"Hot take (contrarian)", goal:"Engagement", fields:[],
       why:"a claim people argue with pulls replies, and a reply is worth about 150x a like to the algorithm. one-sided framing on purpose.",
+      aiBrief:"one contrarian hot take. open with a claim that pushes back on what most people believe about the topic, then one or two short lines that flip the usual advice. no hashtags.",
       build:function(c){ var t=c.t,p=c.p;
         var open=p(["unpopular opinion:","hot take:","controversial but i'll say it:","nobody wants to hear this about "+t+":","let's be honest about "+t+":"],0);
-        var l2=p([
-          "most people treat "+t+" like a checklist. it's a skill, and skills need reps not more tabs open.",
-          cap(t)+" isn't about doing more. it's about cutting the noise until only the thing that works is left.",
-          "everyone's hunting for the hack. the hack is doing the boring part longer than everyone else will.",
-          "you don't have a "+t+" problem. you have a consistency problem wearing a "+t+" costume.",
-          "the people winning at "+t+" aren't smarter than you. they just started before they felt ready."
-        ],1);
-        var l3=p([
-          "pick one thing. do it for 90 days. ignore the rest.",
-          "start ugly, post it anyway, fix it in public.",
-          "stop researching and ship one thing today. you'll learn more in an hour than a month of reading.",
-          "the gap between you and the people you look up to is reps, not talent.",
-          "boring and consistent beats clever and sporadic every single time."
-        ],2);
+        var l2=p(["most people treat "+t+" like a checklist. it's a skill, and skills need reps not more tabs open.",cap(t)+" isn't about doing more. it's about cutting the noise until only the thing that works is left.","everyone's hunting for the hack. the hack is doing the boring part longer than everyone else will.","you don't have a "+t+" problem. you have a consistency problem wearing a "+t+" costume.","the people winning at "+t+" aren't smarter than you. they just started before they felt ready."],1);
+        var l3=p(["pick one thing. do it for 90 days. ignore the rest.","start ugly, post it anyway, fix it in public.","stop researching and ship one thing today. you'll learn more in an hour than a month of reading.","the gap between you and the people you look up to is reps, not talent.","boring and consistent beats clever and sporadic every single time."],2);
         return open+" "+l2+"\n\n"+l3;
-      }
-    },
+      } },
     { id:"proof", name:"Before to after (proof)", goal:"Authority", fields:["before","after","timeframe","lever"],
       why:"specific, honest numbers read as credible. the receipt does the persuading, so the more concrete the before and after, the better.",
+      aiBrief:"a short proof post. state a real before and after result with the topic, then the single lever that made the difference, then a line that makes it feel repeatable for the reader.",
       build:function(c){ var t=c.t,f=c.f,p=c.p;
         var b=f.before||"[where you started]", a=f.after||"[where you are now]";
         var tf=f.timeframe?(" in "+f.timeframe):"", lever=f.lever||"[the one lever that worked]";
         return "went from "+b+" to "+a+tf+" with "+t+".\n\nno "+p(["ads","shortcuts","hacks","secret sauce"],1)+". just "+lever+", repeated until it worked.\n\nif you're stuck, that's the entire move. pick the boring lever and refuse to stop.";
-      }
-    },
+      } },
     { id:"list", name:"Listicle (save-bait)", goal:"Value", fields:["points"],
       why:"numbered lists get bookmarked for later, and bookmarks are a strong quiet signal. paste your points, the tool handles the hook and layout.",
+      aiBrief:"a single post with a numbered list. a hook line promising a specific number of things about the topic, then a tight numbered list of 5 to 7 items, each one short line. end with a soft question.",
       build:function(c){ var t=c.t,f=c.f,p=c.p;
-        var pts=splitPoints(f.points);
-        var n=pts.length||5;
+        var pts=splitPoints(f.points); var n=pts.length||5;
         var head=n+" "+p(["things about","hard truths about","lessons on","underrated moves for"],0)+" "+t+" "+p(["nobody talks about","i learned the hard way","worth stealing","that actually move the needle"],1)+":";
         var body=(pts.length?pts:["[point one]","[point two]","[point three]","[point four]","[point five]"]).map(function(x,i){return (i+1)+". "+x;}).join("\n");
         return head+"\n\n"+body+"\n\nwhich one hits hardest for you?";
-      }
-    },
+      } },
     { id:"howto", name:"How-to (mini guide)", goal:"Value", fields:["points"],
       why:"practical and immediately usable, so people save and share it. give it your steps or ship the scaffold and fill it in.",
+      aiBrief:"a compact how-to post. a hook line, then numbered steps (3 to 6), each step short and actionable. end with a save-it nudge.",
       build:function(c){ var t=c.t,f=c.f,p=c.p;
-        var pts=splitPoints(f.points);
-        var steps=pts.length?pts:["[step one]","[step two]","[step three]"];
+        var pts=splitPoints(f.points); var steps=pts.length?pts:["[step one]","[step two]","[step three]"];
         var head=p(["how to "+t+", the no-fluff version:","the simplest way to "+t+" i've found:",steps.length+" steps to "+t+":"],0);
         var body=steps.map(function(x,i){return (i+1)+". "+x;}).join("\n");
         return head+"\n\n"+body+"\n\nsave this for when you actually need it.";
-      }
-    },
+      } },
     { id:"ask", name:"Question (reply-bait)", goal:"Engagement", fields:[],
       why:"an easy, honest question is the cheapest way to start a conversation, and conversation is the signal the algorithm rewards most.",
+      aiBrief:"a genuine question post that starts a conversation about the topic. warm, honest, low effort to answer, no lecture.",
       build:function(c){ var t=c.t,p=c.p;
-        return p([
-          "honest question about "+t+":\n\nare you actually happy with where you're at, or just used to it?\n\ncurious what most people say.",
-          "quick gut check on "+t+":\n\ndo you have a real system, or are you winging it?\n\nno judgment, i winged it for years.",
-          cap(t)+" people: what's the one thing you wish you'd started a year sooner?\n\ni'll go first in the replies."
-        ],0);
-      }
-    },
+        return p(["honest question about "+t+":\n\nare you actually happy with where you're at, or just used to it?\n\ncurious what most people say.","quick gut check on "+t+":\n\ndo you have a real system, or are you winging it?\n\nno judgment, i winged it for years.",cap(t)+" people: what's the one thing you wish you'd started a year sooner?\n\ni'll go first in the replies."],0);
+      } },
     { id:"launch", name:"Build in public (launch)", goal:"Launch", fields:["oneLiner","link"],
       why:"people root for a real person shipping a real thing. keep the link out of the post so reach isn't suppressed, then drop it in the first reply.",
+      aiBrief:"a build-in-public launch post. what you shipped for the topic in one honest line, why you built it, a humble ask for feedback. keep any link out of the post itself.",
       build:function(c){ var t=c.t,f=c.f;
         var one=f.oneLiner||"[what it does, in one honest line]";
         return "just shipped something for "+t+".\n\n"+one+".\n\nbuilt it because i needed it and couldn't find anything that didn't get in the way. would love your honest take, good or brutal.\n\n(link in the first reply)";
-      }
-    },
+      } },
     { id:"hiring", name:"Hiring / opportunity", goal:"Recruiting", fields:["role","pay","skills","includes","link"],
       why:"the bracketed headline plus clean bullets scans in a second and gets reposted into other people's networks. this is the format from your pinned post.",
+      aiBrief:"a hiring or opportunity post. bracketed headline like [Hiring role], then a short bullet list of must-have skills, then what the work includes, then the terms (remote, contract, pay), then an apply nudge. clean and scannable, keep any link out of the post body.",
       build:function(c){ var t=c.t,f=c.f;
-        var role=f.role||t||"[role]";
-        var pay=f.pay?(" ("+f.pay+")"):"";
+        var role=f.role||t||"[role]"; var pay=f.pay?(" ("+f.pay+")"):"";
         var skills=splitPoints(f.skills), inc=splitPoints(f.includes);
         var sk=(skills.length?skills:["[skill]","[skill]","[skill]"]).map(function(s){return "• "+s;}).join("\n");
         var ic=(inc.length?inc:["[what they'll build]","[what they'll build]"]).map(function(s){return "→ "+s;}).join("\n");
         return "[Hiring "+cap(role)+pay+"]\n\nlooking for experience in:\n\n"+sk+"\n\nwork includes:\n\n"+ic+"\n\nremote contract work.\n\napply below 👇";
-      }
-    }
+      } }
   ];
 
   var THREAD = [
-    { id:"t-howto", name:"Step-by-step guide", goal:"Authority", fields:["points"],
+    { id:"t-howto", name:"Step-by-step guide", goal:"Authority", fields:["points"], threadLen:"6 to 9",
       why:"the strongest thread shape in 2026. one idea per post, a sub-hook on every line, and a clear payoff people bookmark.",
+      aiBrief:"a step by step guide thread. post 1 is a strong hook promising the whole method. then one post per step, each starting with its own mini hook. last post is a short CTA to follow and repost the first post.",
       build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
         var steps=splitPoints(f.points);
         var use=steps.length?steps:["[step one - the setup nobody mentions]","[step two - the core move]","[step three - the multiplier]","[step four - the mistake to skip]","[step five - how to lock it in]"];
-        var hook=p([
-          "most people are doing "+t+" on hard mode.\n\nhere's the whole thing in "+use.length+" steps 🧵",
-          "i wasted way too long figuring out "+t+".\n\nyou can skip the mess. the full playbook 🧵",
-          cap(t)+", explained properly for once.\n\n"+use.length+" steps, zero fluff 🧵"
-        ],0);
-        var body=use.map(function(s,i){return (i+1)+". "+s;});
-        return [hook].concat(body,[CTA(t,f,p,h)]);
-      }
-    },
-    { id:"t-list", name:"Listicle thread", goal:"Value", fields:["points"],
+        var hook=p(["most people are doing "+t+" on hard mode.\n\nhere's the whole thing in "+use.length+" steps 🧵","i wasted way too long figuring out "+t+".\n\nyou can skip the mess. the full playbook 🧵",cap(t)+", explained properly for once.\n\n"+use.length+" steps, zero fluff 🧵"],0);
+        return [hook].concat(use.map(function(s,i){return (i+1)+". "+s;}),[CTA(t,f,p,h)]);
+      } },
+    { id:"t-list", name:"Listicle thread", goal:"Value", fields:["points"], threadLen:"7 to 10",
       why:"the most shareable thread format. each item earns its own post, so each one is a fresh chance to get reposted.",
+      aiBrief:"a listicle thread. post 1 hooks with the number and the promise. then one post per item, each a self-contained tip about the topic. last post is a CTA.",
       build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
         var pts=splitPoints(f.points);
         var use=pts.length?pts:["[the one most people skip]","[the counterintuitive one]","[the one that saved me months]","[the one nobody warns you about]","[the one that compounds]"];
-        var hook=p([
-          use.length+" "+t+" lessons i wish someone handed me on day one 🧵",
-          "i studied the best people at "+t+" for a year.\n\nthey all quietly do these "+use.length+" things 🧵",
-          use.length+" things about "+t+" that took me way too long to learn 🧵"
-        ],0);
-        var body=use.map(function(s,i){return (i+1)+". "+s;});
-        return [hook].concat(body,[CTA(t,f,p,h)]);
-      }
-    },
-    { id:"t-story", name:"Story thread", goal:"Engagement", fields:["before","after","lever"],
+        var hook=p([use.length+" "+t+" lessons i wish someone handed me on day one 🧵","i studied the best people at "+t+" for a year.\n\nthey all quietly do these "+use.length+" things 🧵",use.length+" things about "+t+" that took me way too long to learn 🧵"],0);
+        return [hook].concat(use.map(function(s,i){return (i+1)+". "+s;}),[CTA(t,f,p,h)]);
+      } },
+    { id:"t-story", name:"Story thread", goal:"Engagement", fields:["before","after","lever"], threadLen:"6 to 8",
       why:"story threads pull the most replies because people get invested in how it ends. the arc keeps them reading to the payoff.",
+      aiBrief:"a story thread with a real arc. hook with the transformation, then the rough starting point, the struggle, the turning point (the lever), the payoff, then a CTA. make people feel it.",
       build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
         var b=f.before||"[the rough starting point, be specific]", a=f.after||"[where you are now]", lever=f.lever||"[the turning point]";
-        var hook=p([
-          "two years ago i almost quit "+t+".\n\ntoday it's the best call i ever made.\n\nhere's what actually changed 🧵",
-          "the honest story of how "+t+" went from "+b+" to "+a+".\n\ngrab a coffee 🧵"
-        ],0);
-        return [
-          hook,
-          "first, the part i don't love admitting.\n\n"+b+". i had no idea what i was doing and it showed.",
-          "i did all the usual advice. it didn't work, because it wasn't solving the real problem.",
-          "the actual shift was "+lever+".\n\nsounds almost too small to matter. it wasn't.",
-          a+".\n\nsame person, different inputs. that's the whole story.",
-          CTA(t,f,p,h)
-        ];
-      }
-    },
-    { id:"t-contra", name:"Contrarian breakdown", goal:"Engagement", fields:["points"],
+        var hook=p(["two years ago i almost quit "+t+".\n\ntoday it's the best call i ever made.\n\nhere's what actually changed 🧵","the honest story of how "+t+" went from "+b+" to "+a+".\n\ngrab a coffee 🧵"],0);
+        return [hook,"first, the part i don't love admitting.\n\n"+b+". i had no idea what i was doing and it showed.","i did all the usual advice. it didn't work, because it wasn't solving the real problem.","the actual shift was "+lever+".\n\nsounds almost too small to matter. it wasn't.",a+".\n\nsame person, different inputs. that's the whole story.",CTA(t,f,p,h)];
+      } },
+    { id:"t-contra", name:"Contrarian breakdown", goal:"Engagement", fields:["points"], threadLen:"6 to 8",
       why:"opens with a claim that makes people stop and argue, then earns the reaction by showing the better way. tension up top, payoff below.",
+      aiBrief:"a contrarian breakdown thread. hook by saying the common advice on the topic is wrong. explain why it fails. then give the better way as a few concrete moves, one per post. CTA at the end.",
       build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
         var pts=splitPoints(f.points);
         var fixes=pts.length?pts:["[what to do instead - point one]","[point two]","[point three]"];
-        var hook=p([
-          "everything you've been told about "+t+" is backwards.\n\nlet me show you what actually works 🧵",
-          "the popular advice on "+t+" is quietly wasting your time.\n\nhere's the version that works 🧵"
-        ],0);
-        var mid=[
-          "the advice everyone repeats:\n\n"+p(["do more, hustle harder, grind it out.","copy the exact steps that worked for someone with a totally different starting point.","wait until you're an expert before you start."],1),
-          "why it fails:\n\nit skips the one thing that actually moves the needle for "+t+", and quietly wastes the months you can't get back."
-        ];
-        var body=fixes.map(function(x,i){return "what to do instead, "+(i+1)+":\n\n"+x;});
-        return [hook].concat(mid,body,[CTA(t,f,p,h)]);
-      }
-    },
-    { id:"t-case", name:"Case study (results)", goal:"Authority", fields:["before","after","timeframe","lever","points"],
+        var hook=p(["everything you've been told about "+t+" is backwards.\n\nlet me show you what actually works 🧵","the popular advice on "+t+" is quietly wasting your time.\n\nhere's the version that works 🧵"],0);
+        var mid=["the advice everyone repeats:\n\n"+p(["do more, hustle harder, grind it out.","copy the exact steps that worked for someone with a totally different starting point.","wait until you're an expert before you start."],1),"why it fails:\n\nit skips the one thing that actually moves the needle for "+t+", and quietly wastes the months you can't get back."];
+        return [hook].concat(mid,fixes.map(function(x,i){return "what to do instead, "+(i+1)+":\n\n"+x;}),[CTA(t,f,p,h)]);
+      } },
+    { id:"t-case", name:"Case study (results)", goal:"Authority", fields:["before","after","timeframe","lever","points"], threadLen:"7 to 9",
       why:"a real result up top buys attention, then the exact steps pay it off. concrete numbers plus a repeatable method is the most trusted shape.",
+      aiBrief:"a case study thread. hook with a specific result. then context, the main lever, the exact steps one per post, the numbers, then a CTA.",
       build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
         var b=f.before||"[starting point]", a=f.after||"[the result]", tf=f.timeframe?(" in "+f.timeframe):"", lever=f.lever||"[the main lever]";
         var pts=splitPoints(f.points);
         var steps=(pts.length?pts:["[what i did first]","[the move that actually worked]","[how i scaled it]"]).map(function(x,i){return (i+1)+". "+x;});
         var hook=b+" to "+a+tf+" with "+t+".\n\nhere's exactly what i did, no vague advice 🧵";
-        return [
-          hook,
-          "context:\n\n"+b+". i wasn't special, i just committed to figuring it out in public.",
-          "the main lever was "+lever+".\n\nalmost everything else turned out to be a distraction.",
-        ].concat(steps,[
-          "the numbers:\n\n"+a+tf+". and it's still compounding.",
-          CTA(t,f,p,h)
-        ]);
-      }
-    }
+        return [hook,"context:\n\n"+b+". i wasn't special, i just committed to figuring it out in public.","the main lever was "+lever+".\n\nalmost everything else turned out to be a distraction."].concat(steps,["the numbers:\n\n"+a+tf+". and it's still compounding.",CTA(t,f,p,h)]);
+      } }
   ];
 
   function currentList(){ return state.fmt==="single" ? SINGLE : THREAD; }
   function currentTmpl(){ var l=currentList(); for(var i=0;i<l.length;i++){ if(l[i].id===state.tmplId) return l[i]; } return l[0]; }
 
-  /* ---------------- render controls ---------------- */
   function renderTemplateOptions(){
-    var sel=$("tmpl"), list=currentList();
-    // group by goal
-    var groups={}, order=[];
+    var sel=$("tmpl"), list=currentList(), groups={}, order=[];
     list.forEach(function(tp){ if(!groups[tp.goal]){groups[tp.goal]=[];order.push(tp.goal);} groups[tp.goal].push(tp); });
     sel.innerHTML="";
-    order.forEach(function(g){
-      var og=document.createElement("optgroup"); og.label=g;
-      groups[g].forEach(function(tp){
-        var o=document.createElement("option"); o.value=tp.id; o.textContent=tp.name; og.appendChild(o);
-      });
-      sel.appendChild(og);
-    });
+    order.forEach(function(g){ var og=document.createElement("optgroup"); og.label=g;
+      groups[g].forEach(function(tp){ var o=document.createElement("option"); o.value=tp.id; o.textContent=tp.name; og.appendChild(o); });
+      sel.appendChild(og); });
     if(!currentList().some(function(tp){return tp.id===state.tmplId;})) state.tmplId=list[0].id;
     sel.value=state.tmplId;
     renderWhyAndFields();
   }
-
   function renderWhyAndFields(){
     var tp=currentTmpl();
     $("why").innerHTML="<b>why it works.</b> "+tp.why;
     var extra=$("extra"); extra.innerHTML="";
-    var keys=tp.fields||[];
-    // pair simple text fields two-up where it reads well
-    var i=0;
+    var keys=tp.fields||[], i=0;
     while(i<keys.length){
-      var k=keys[i], meta=FIELDS[k];
-      var isTa = meta.type==="ta";
-      var next = keys[i+1], nextMeta = next?FIELDS[next]:null;
-      if(!isTa && nextMeta && nextMeta.type!=="ta"){
-        var row=document.createElement("div"); row.className="two";
-        row.appendChild(fieldEl(k,meta)); row.appendChild(fieldEl(next,nextMeta));
-        extra.appendChild(row); i+=2;
-      } else {
-        extra.appendChild(fieldEl(k,meta)); i+=1;
-      }
+      var k=keys[i], meta=FIELDS[k], isTa=meta.type==="ta";
+      var next=keys[i+1], nextMeta=next?FIELDS[next]:null;
+      if(!isTa && nextMeta && nextMeta.type!=="ta"){ var row=document.createElement("div"); row.className="two"; row.appendChild(fieldEl(k,meta)); row.appendChild(fieldEl(next,nextMeta)); extra.appendChild(row); i+=2; }
+      else { extra.appendChild(fieldEl(k,meta)); i+=1; }
     }
   }
-
   function fieldEl(key,meta){
     var box=document.createElement("div");
     var lb=document.createElement("label"); lb.className="lb"; lb.setAttribute("for","f_"+key);
     lb.innerHTML=meta.label + (meta.hint?(" <span class='hint'>- "+meta.hint+"</span>"):"");
-    var el;
-    if(meta.type==="ta"){ el=document.createElement("textarea"); el.className="ta"; }
-    else { el=document.createElement("input"); el.className="inp"; el.setAttribute("autocomplete","off"); }
+    var el; if(meta.type==="ta"){ el=document.createElement("textarea"); el.className="ta"; } else { el=document.createElement("input"); el.className="inp"; el.setAttribute("autocomplete","off"); }
     el.id="f_"+key; el.placeholder=meta.ph; el.dataset.key=key;
-    box.appendChild(lb); box.appendChild(el);
-    return box;
+    box.appendChild(lb); box.appendChild(el); return box;
   }
+  function collectFields(){ var f={}, tp=currentTmpl(); (tp.fields||[]).forEach(function(k){ var el=$("f_"+k); f[k]=el?el.value.trim():""; }); return f; }
 
-  function collectFields(){
-    var f={}, tp=currentTmpl();
-    (tp.fields||[]).forEach(function(k){ var el=$("f_"+k); f[k]=el?el.value.trim():""; });
-    return f;
-  }
-
-  /* ---------------- generate ---------------- */
   function generate(){
     var topic=$("topic").value.trim();
     if(!topic){ var ti=$("topic"); ti.classList.remove("shake"); void ti.offsetWidth; ti.classList.add("shake"); ti.focus(); return; }
-    state.gen++;
-    var f=collectFields();
-    state.link=f.link||"";
+    if(state.busy) return;
+    var f=collectFields(); state.link=f.link||"";
     var h=($("handle").value||"@yourhandle").replace(/^@+/,"")||"yourhandle";
+
+    if(state.engine==="ai"){
+      if(!state.key){ openSettings(); showError("add a gemini key to use the AI writer, or switch to templates."); return; }
+      state.gen++;
+      setBusy(true);
+      var prompt=buildAIPrompt(topic,f,h);
+      callGemini(prompt).then(function(posts){
+        state.tweets=posts.map(sanitize).filter(Boolean);
+        if(!state.tweets.length) throw new Error("the model returned an empty post, try again");
+        renderTweets(); runSignal();
+      }).catch(function(err){
+        showError((err&&err.message)?err.message:"generation failed");
+      }).then(function(){ setBusy(false); });
+      return;
+    }
+    state.gen++;
     var ctx={ t:topic, f:f, p:makePick(state.gen), h:h };
     var out=currentTmpl().build(ctx);
     var arr=Array.isArray(out)?out:[out];
     state.tweets=arr.map(sanitize);
-    renderTweets();
-    runSignal();
+    renderTweets(); runSignal();
   }
 
-  /* ---------------- render tweets ---------------- */
-  function renderTweets(){
-    var wrap=$("tweets"); wrap.innerHTML="";
-    var threaded = state.tweets.length>1;
-    var number = $("numberToggle").checked;
-    $("threadTools").hidden = !threaded;
-    $("fmtBadge").textContent = threaded ? (state.tweets.length+" posts") : "Single";
-    $("tcount").textContent = state.tweets.length+" posts";
+  function seedExample(){
+    var topic=$("topic").value.trim(); if(!topic) return;
+    state.gen++;
+    var f=collectFields(); state.link=f.link||"";
+    var h=($("handle").value||"@yourhandle").replace(/^@+/,"")||"yourhandle";
+    var out=currentTmpl().build({ t:topic, f:f, p:makePick(state.gen), h:h });
+    var arr=Array.isArray(out)?out:[out];
+    state.tweets=arr.map(sanitize); renderTweets(); runSignal();
+  }
 
+  function buildAIPrompt(topic,f,h){
+    var tp=currentTmpl(), isThread=state.fmt==="thread", L=[];
+    L.push("you're a sharp person who is very good at writing posts for X (twitter) that actually get reach. you write like a real human typing fast, not like a brand or an AI.");
+    L.push("");
+    L.push("write "+(isThread?("a thread of "+(tp.threadLen||"6 to 8")+" posts"):"a single post")+" about this topic:");
+    L.push('"'+topic+'"');
+    L.push("");
+    L.push("structure to follow ("+tp.name+"): "+tp.aiBrief);
+    var specs=[];
+    ["before","after","timeframe","lever","oneLiner","role","pay"].forEach(function(k){ if(f[k]) specs.push("- "+FIELDS[k].label+": "+f[k]); });
+    ["points","skills","includes"].forEach(function(k){ if(f[k]) specs.push("- "+FIELDS[k].label+":\n"+f[k]); });
+    L.push("");
+    if(specs.length){ L.push("use these real details from me, weave them in naturally, do not just paste them as a list:"); L.push(specs.join("\n")); }
+    else { L.push("i did not give specific numbers or points. invent realistic, concrete sounding specifics (believable numbers, timeframes, examples) so it reads like a finished post i can edit. never leave blanks or square brackets."); }
+    if(f.link){ L.push(""); L.push("i have a link ("+f.link+"). do not put it in the post text. instead, "+(isThread?"end the last post":"end the post")+" by telling people the link is in the first reply."); }
+    L.push("");
+    L.push("how X reach works in 2026, respect it:");
+    L.push("- the first line is everything. make it stop the scroll: a bold claim, a specific number, or a real tension.");
+    L.push("- write to earn replies and reposts, not likes. "+(isThread?"give each post its own first-line hook.":"end on something people want to reply to."));
+    L.push("- one clear idea. specifics beat adjectives. no vague filler.");
+    L.push("- at most one hashtag, ideally none. never write in all caps.");
+    L.push("");
+    L.push("voice rules, these matter a lot:");
+    L.push("- sound like a real person. lowercase is fine, use contractions, vary sentence length, be a little blunt.");
+    L.push("- NEVER use an em dash or en dash, no exceptions. use a comma, a period, or a new line instead.");
+    L.push("- banned words, never use any of these: delve, leverage, utilize, robust, seamless, comprehensive, elevate, unlock, boasts, testament, realm, landscape, tapestry, furthermore, moreover, game-changer, supercharge, dive in, in conclusion.");
+    L.push("- no corporate tone, no cringe hype, no emoji spam. one emoji at most, only if it truly fits.");
+    L.push("");
+    L.push("return json only, shaped as {\"posts\":[\"...\"]}, with "+(isThread?"one string per post in order":"exactly one string in the array")+". no preamble, no commentary.");
+    return L.join("\n");
+  }
+
+  function callGemini(promptText){
+    var url="https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(state.model)+":generateContent?key="+encodeURIComponent(state.key);
+    var body={ contents:[{role:"user",parts:[{text:promptText}]}],
+      generationConfig:{ temperature:1.05, maxOutputTokens:2048, responseMimeType:"application/json",
+        responseSchema:{ type:"OBJECT", properties:{ posts:{ type:"ARRAY", items:{ type:"STRING" } } }, required:["posts"] } } };
+    return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){
+      return r.json().catch(function(){return null;}).then(function(data){
+        if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")"); if(r.status===429) m="hit the free-tier rate limit. wait a minute, or switch to gemini-2.5-flash-lite in settings for higher limits."; throw new Error(m); }
+        if(!data) throw new Error("could not read the response");
+        if(data.promptFeedback&&data.promptFeedback.blockReason) throw new Error("blocked by a safety filter ("+data.promptFeedback.blockReason+"). try rephrasing the topic.");
+        if(!data.candidates||!data.candidates.length) throw new Error("the model returned no content, try again");
+        var cand=data.candidates[0];
+        var text=(cand.content&&cand.content.parts)?cand.content.parts.map(function(p){return p.text||"";}).join(""):"";
+        if(!text && cand.finishReason && cand.finishReason!=="STOP") throw new Error("model stopped early ("+cand.finishReason+"), try again or shorten the request");
+        var posts=null; try{ var parsed=JSON.parse(text); if(parsed&&parsed.posts) posts=parsed.posts; }catch(e){}
+        if(!posts||!posts.length){ text=String(text).trim(); if(!text) throw new Error("the model returned an empty response, try again"); posts=[text]; }
+        return posts.map(function(x){return String(x);});
+      });
+    });
+  }
+
+  function renderTweets(){
+    clearError();
+    var wrap=$("tweets"); wrap.innerHTML="";
+    var threaded=state.tweets.length>1, number=$("numberToggle").checked;
+    $("threadTools").hidden=!threaded;
+    $("fmtBadge").textContent=threaded?(state.tweets.length+" posts"):"Single";
+    $("tcount").textContent=state.tweets.length+" posts";
     state.tweets.forEach(function(txt,i){
       var t=document.createElement("div"); t.className="tweet"+(threaded?" threaded":"");
-      if(threaded){
-        var num=document.createElement("div"); num.className="tnum"; num.textContent=(i+1); t.appendChild(num);
-      }
+      if(threaded){ var num=document.createElement("div"); num.className="tnum"; num.textContent=(i+1); t.appendChild(num); }
       var body=document.createElement("div"); body.className="tbody";
-      var disp = (threaded && number) ? ((i+1)+"/ "+txt) : txt;
+      var disp=(threaded&&number)?((i+1)+"/ "+txt):txt;
       var tx=document.createElement("div"); tx.className="ttext"; tx.contentEditable="true"; tx.spellcheck=false; tx.textContent=disp;
       tx.addEventListener("input", onEdit);
-      tx.addEventListener("paste", function(e){
-        e.preventDefault();
-        var text=(e.clipboardData||window.clipboardData).getData("text/plain");
-        document.execCommand("insertText",false,text);
-      });
+      tx.addEventListener("paste", function(e){ e.preventDefault(); var text=(e.clipboardData||window.clipboardData).getData("text/plain"); document.execCommand("insertText",false,text); });
       var foot=document.createElement("div"); foot.className="tfoot";
       var cc=document.createElement("span"); cc.className="cc";
       var mini=document.createElement("button"); mini.className="mini"; mini.innerHTML=copyIcon()+"<span>Copy</span>";
       mini.addEventListener("click", function(){ copyText(tx.innerText, mini); });
-      foot.appendChild(cc); foot.appendChild(mini);
-      body.appendChild(tx); body.appendChild(foot);
-      t.appendChild(body); wrap.appendChild(t);
+      foot.appendChild(cc); foot.appendChild(mini); body.appendChild(tx); body.appendChild(foot); t.appendChild(body); wrap.appendChild(t);
       updateCount(tx, cc);
     });
-
-    // first-reply helper when a link exists on a single post
     var rh=$("replyHint"); rh.innerHTML="";
-    if(state.link && !( state.tweets.length>1 )){
+    if(state.link && !(state.tweets.length>1)){
       var box=document.createElement("div"); box.className="reply-hint";
       box.innerHTML="<div class='rh-t'>"+plusIcon()+"post it, then reply with this</div><div class='rh-b'>here's the link 👇\n"+escapeHtml(state.link)+"</div>";
       rh.appendChild(box);
     }
   }
-
   function onEdit(e){ var tx=e.target; var cc=tx.parentNode.querySelector(".cc"); updateCount(tx,cc); scheduleSignal(); }
+  function updateCount(tx, cc){ var n=tx.innerText.replace(/​/g,"").length; cc.textContent=n+" / 280"; cc.className="cc"+(n>280?" bad":(n>265?" warn":"")); }
 
-  function updateCount(tx, cc){
-    var n=tx.innerText.replace(/​/g,"").length;
-    cc.textContent=n+" / 280";
-    cc.className="cc"+(n>280?" bad":(n>265?" warn":""));
+  function setBusy(on){
+    state.busy=on;
+    $("genBtn").disabled=on; $("shuffleBtn").disabled=on;
+    $("genLabel").innerHTML = on ? "writing..." : "Generate";
+    var svg=$("genBtn").querySelector("svg"); if(svg) svg.style.display=on?"none":"";
+    var old=$("genBtn").querySelector(".spin"); if(old) old.parentNode.removeChild(old);
+    if(on){ var s=document.createElement("span"); s.className="spin"; $("genBtn").insertBefore(s,$("genLabel"));
+      $("tweets").innerHTML="<div class='skel-note'><span class='spin' style='border-color:color-mix(in srgb,var(--accent) 40%,transparent);border-top-color:var(--accent)'></span>gemini is writing this...</div><div class='skelwrap'><div class='skel'></div><div class='skel'></div><div class='skel short'></div></div>";
+      $("threadTools").hidden=true; $("replyHint").innerHTML="";
+    }
   }
+  function showError(msg){
+    var wrap=$("tweets"); $("threadTools").hidden=true; $("replyHint").innerHTML="";
+    var d=document.createElement("div"); d.className="errcard";
+    d.innerHTML="<div class='ec-t'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 9v4M12 17h.01M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z'/></svg>could not generate</div><div class='ec-m'>"+escapeHtml(msg)+"</div><div class='ec-a'><button id='ecKey'>open settings</button><button id='ecTpl'>use templates instead</button></div>";
+    wrap.innerHTML=""; wrap.appendChild(d);
+    $("ecKey").addEventListener("click", openSettings);
+    $("ecTpl").addEventListener("click", function(){ setEngine("template"); generate(); });
+  }
+  function clearError(){ /* error card lives inside #tweets and is replaced on next render */ }
 
-  /* ---------------- signal check ---------------- */
   var sigTimer=null;
   function scheduleSignal(){ clearTimeout(sigTimer); sigTimer=setTimeout(runSignal,180); }
-
-  function domTweets(){
-    return Array.prototype.map.call(document.querySelectorAll("#tweets .ttext"), function(n){ return n.innerText.replace(/​/g,""); });
-  }
-
+  function domTweets(){ return Array.prototype.map.call(document.querySelectorAll("#tweets .ttext"), function(n){ return n.innerText.replace(/​/g,""); }); }
   function runSignal(){
     var tweets=domTweets(); if(!tweets.length){ return; }
-    var full=tweets.join("\n"), lower=full.toLowerCase();
-    var first=tweets[0], last=tweets[tweets.length-1];
-    var checks=[], score=52;
-
-    // hook quality
+    var full=tweets.join("\n"), lower=full.toLowerCase(), first=tweets[0], checks=[], score=52;
     var hookLen=first.replace(/\s+/g," ").trim().length;
     if(hookLen>0 && hookLen<=210){ score+=12; checks.push(ok("Hook lands fast","the first line does the work before anyone taps 'show more'.")); }
     else if(hookLen>210){ score+=4; checks.push(warn("Hook runs long","tighten the first post, the opening 2 seconds decide if the rest gets read.")); }
-
-    // reply / conversation bait
-    if(/\?/.test(full) || /(reply|replies|comment|below|your take|agree|thoughts|which one)/.test(lower)){
-      score+=14; checks.push(ok("Invites replies","a reply is worth roughly 150x a like, this gives people a reason to leave one."));
-    } else {
-      checks.push(warn("No reply prompt","add a question or a 'which one hits' so people comment. replies drive reach more than anything else."));
-    }
-
-    // CTA to repost / follow / save
-    if(/(repost|retweet|follow|bookmark|save this|share)/.test(lower)){
-      score+=10; checks.push(ok("Clear next step","asking for a repost or follow compounds reach past your own followers."));
-    } else {
-      checks.push(warn("No call to action","one soft line (repost, follow, save) noticeably lifts reposts and bookmarks."));
-    }
-
-    // link placement
+    if(/\?/.test(full) || /(reply|replies|comment|below|your take|agree|thoughts|which one)/.test(lower)){ score+=14; checks.push(ok("Invites replies","a reply is worth roughly 150x a like, this gives people a reason to leave one.")); }
+    else { checks.push(warn("No reply prompt","add a question or a 'which one hits' so people comment. replies drive reach more than anything else.")); }
+    if(/(repost|retweet|follow|bookmark|save this|share)/.test(lower)){ score+=10; checks.push(ok("Clear next step","asking for a repost or follow compounds reach past your own followers.")); }
+    else { checks.push(warn("No call to action","one soft line (repost, follow, save) noticeably lifts reposts and bookmarks.")); }
     var linkRe=/(https?:\/\/|www\.|\b[a-z0-9-]+\.(com|io|ai|co|org|net|dev|xyz|app|gg)\b)/i;
-    if(linkRe.test(first)){
-      score-=16; checks.push(bad("Link is in the main post","move it to the first reply. links in the post itself get reach suppressed in 2026."));
-    } else if(state.link){
-      score+=6; checks.push(ok("Link kept out of the post","drop it in the first reply instead, exactly where reach isn't penalized."));
-    }
-
-    // all caps shout
-    var caps=full.match(/\b[A-Z]{4,}\b/g);
-    caps=caps?caps.filter(function(w){return ["MCP","API","APIS","HTTP","JSON","NASA","FAQ","CEO","SaaS","SQL","YAML"].indexOf(w)===-1;}):[];
+    if(linkRe.test(first)){ score-=16; checks.push(bad("Link is in the main post","move it to the first reply. links in the post itself get reach suppressed in 2026.")); }
+    else if(state.link){ score+=6; checks.push(ok("Link kept out of the post","drop it in the first reply instead, exactly where reach is not penalized.")); }
+    var caps=full.match(/\b[A-Z]{4,}\b/g); caps=caps?caps.filter(function(w){return ["MCP","API","APIS","HTTP","JSON","NASA","FAQ","CEO","SAAS","SQL","YAML"].indexOf(w)===-1;}):[];
     if(caps.length){ score-=8; checks.push(warn("All-caps words","'"+caps[0]+"' reads as shouting and gets throttled. use lowercase for emphasis instead.")); }
-
-    // hashtag spam
     var tags=(full.match(/#\w+/g)||[]).length;
     if(tags>2){ score-=6; checks.push(warn(tags+" hashtags","keep it to one or none. stacked hashtags look like spam to the ranker.")); }
-
-    // length / thread shape
     var over=tweets.filter(function(x){return x.length>280;}).length;
     if(over){ checks.push(warn(over+" post"+(over>1?"s":"")+" over 280","fine if you're on Premium, otherwise trim. the counters show where.")); }
     if(tweets.length>1){
       if(tweets.length>=4 && tweets.length<=12){ score+=6; checks.push(ok("Thread length is in the pocket",tweets.length+" posts is the range that holds attention without losing people.")); }
       else if(tweets.length>12){ score+=2; checks.push(warn("Long thread","past ~12 posts drop-off gets steep. cut to your strongest points.")); }
     }
-
-    // AI-trace guard
     var hits=[]; if(/[—–]/.test(full)) hits.push("em dash");
     BANNED.forEach(function(w){ if(lower.indexOf(w)>-1) hits.push('"'+w+'"'); });
     if(hits.length){ score-=6; checks.push(bad("Reads AI-written","found "+hits.slice(0,3).join(", ")+". swap it out, that is the giveaway you asked to avoid.")); }
     else { score+=6; checks.push(ok("Clean of AI tells","no em dashes, no robot words. this reads like a person typed it.")); }
-
     score=Math.max(0,Math.min(100,Math.round(score)));
     paintScore(score);
     var box=$("checks"); box.innerHTML=""; checks.forEach(function(c){ box.appendChild(c); });
   }
-
   function paintScore(s){
-    $("scoreNum").textContent=s;
-    var band, sub, col;
+    $("scoreNum").textContent=s; var band,sub,col;
     if(s>=85){ band="Elite"; sub="this is built to travel. post it in an active window and reply fast."; col="var(--good)"; }
     else if(s>=70){ band="Strong"; sub="solid. clear the warnings below and it's ready to ship."; col="var(--good)"; }
     else if(s>=50){ band="Okay"; sub="it'll post fine, but the fixes below are where the reach is."; col="var(--warn)"; }
     else { band="Needs work"; sub="fix the flagged items before this goes out."; col="var(--bad)"; }
-    $("scoreBand").textContent=band; $("scoreBand").style.color=col;
-    $("scoreSub").textContent=sub;
+    $("scoreBand").textContent=band; $("scoreBand").style.color=col; $("scoreSub").textContent=sub;
     var fill=$("meterFill"); fill.style.width=s+"%"; fill.style.background=col;
   }
-
   function ok(t,s){ return chk("ok",t,s,'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'); }
   function warn(t,s){ return chk("warn",t,s,'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/></svg>'); }
   function bad(t,s){ return chk("bad",t,s,'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'); }
-  function chk(kind,t,s,ic){
-    var d=document.createElement("div"); d.className="chk "+kind;
-    d.innerHTML="<span class='ic'>"+ic+"</span><span class='tx'><b>"+t+".</b> <span>"+s+"</span></span>";
-    return d;
-  }
+  function chk(kind,t,s,ic){ var d=document.createElement("div"); d.className="chk "+kind; d.innerHTML="<span class='ic'>"+ic+"</span><span class='tx'><b>"+t+".</b> <span>"+s+"</span></span>"; return d; }
 
-  /* ---------------- copy ---------------- */
   function copyText(text, btn){
     var done=function(){ if(btn){ var old=btn.innerHTML; btn.classList.add("done"); btn.innerHTML=checkIcon()+"<span>Copied</span>"; setTimeout(function(){ btn.classList.remove("done"); btn.innerHTML=old; },1400);} toast("Copied"); };
     if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, function(){ legacyCopy(text); done(); }); }
     else { legacyCopy(text); done(); }
   }
-  function legacyCopy(text){
-    var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
-    try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta);
+  function legacyCopy(text){ var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); }
+  function copyThread(){ copyText(domTweets().join("\n\n"), $("copyAll")); }
+
+  function openSettings(){ $("keyInput").value=state.key||""; $("modelSel").value=state.model||"gemini-2.5-flash"; $("modal").classList.add("open"); }
+  function closeSettings(){ $("modal").classList.remove("open"); }
+  function mstatus(msg,kind){ var el=$("mstatus"); el.textContent=msg; el.className="mstatus "+(kind||"muted"); }
+  function testKey(){
+    var k=$("keyInput").value.trim();
+    if(!k){ mstatus("paste a key first.","bad"); return; }
+    mstatus("checking...","muted"); $("saveKey").disabled=true;
+    fetch("https://generativelanguage.googleapis.com/v1beta/models?key="+encodeURIComponent(k)).then(function(r){
+      return r.json().catch(function(){return null;}).then(function(data){
+        if(!r.ok){ throw new Error(data&&data.error&&data.error.message?data.error.message:("HTTP "+r.status)); }
+        var models=(data.models||[]).filter(function(m){ return (m.supportedGenerationMethods||[]).indexOf("generateContent")>-1 && /gemini/i.test(m.name) && !/embedding|aqa|imagen|veo|tts|image-generation/i.test(m.name); });
+        if(!models.length) throw new Error("this key has no text models available");
+        state.key=k; populateModels(models); state.model=$("modelSel").value; setEngine("ai"); savePrefs();
+        mstatus("connected. "+models.length+" models available, using "+state.model+".","good"); toast("AI writer connected");
+      });
+    }).catch(function(err){ mstatus((err&&err.message)?err.message:"could not connect","bad"); }).then(function(){ $("saveKey").disabled=false; });
   }
-  function copyThread(){
-    var tweets=domTweets();
-    var number=$("numberToggle").checked;
-    // if already numbered inline (toggle on), text carries it; join with blank line
-    var joined=tweets.join("\n\n");
-    copyText(joined, $("copyAll"));
+  function populateModels(models){
+    var order=function(n){ var s=n.toLowerCase(); if(s.indexOf("flash-lite")>-1)return 0; if(s.indexOf("flash")>-1)return 1; if(s.indexOf("pro")>-1)return 2; return 3; };
+    models.sort(function(a,b){ return order(a.name)-order(b.name) || a.name.localeCompare(b.name); });
+    var sel=$("modelSel"), prev=state.model; sel.innerHTML="";
+    models.forEach(function(m){ var id=m.name.replace(/^models\//,""); var o=document.createElement("option"); o.value=id;
+      var free=/flash/i.test(id)?" (free tier)":""; o.textContent=id+free; sel.appendChild(o); });
+    var ids=models.map(function(m){return m.name.replace(/^models\//,"");});
+    if(ids.indexOf(prev)>-1) sel.value=prev; else { var pref=ids.filter(function(x){return /flash/i.test(x)&&!/lite/i.test(x);})[0]||ids.filter(function(x){return /flash/i.test(x);})[0]||ids[0]; sel.value=pref; state.model=pref; }
+  }
+  function setEngine(eng){
+    if(eng==="ai" && !state.key){ setEngineButtons("template"); openSettings(); return; }
+    state.engine=eng; setEngineButtons(eng); reflectEngine(); savePrefs();
+  }
+  function setEngineButtons(eng){ Array.prototype.forEach.call(document.querySelectorAll("#engineSeg button"), function(b){ b.setAttribute("aria-selected", b.dataset.eng===eng?"true":"false"); }); }
+  function reflectEngine(){
+    var ai=state.engine==="ai";
+    $("engDot").className="dot"+(ai?" on":"");
+    $("engLabel").textContent= ai ? "AI on" : "Templates";
+    $("modeHint").innerHTML = ai
+      ? "gemini writes each post fresh for your topic using <b>"+ (state.model||"gemini") +"</b>. your key, your call."
+      : "free and instant, runs offline from a proven set of viral structures. add a gemini key in <b>settings</b> for fresh AI writing.";
   }
 
-  /* ---------------- misc ui ---------------- */
   function toast(msg){ var t=$("toast"); $("toastMsg").textContent=msg; t.classList.add("show"); clearTimeout(t._tm); t._tm=setTimeout(function(){ t.classList.remove("show"); },1500); }
   function copyIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }
   function checkIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'; }
   function plusIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h1M15 7h2a5 5 0 0 1 0 10h-1M8 12h8"/></svg>'; }
-  function escapeHtml(s){ return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function setAvatar(){ var h=($("handle").value||"Y").replace(/^@+/,""); $("avatar").textContent=(h[0]||"Y").toUpperCase(); var seed=0; for(var i=0;i<h.length;i++){ seed=(seed*31+h.charCodeAt(i))%360; } $("avatar").style.background="linear-gradient(140deg,hsl("+seed+" 70% 58%),hsl("+((seed+40)%360)+" 72% 52%))"; }
 
-  function setAvatar(){
-    var h=($("handle").value||"Y").replace(/^@+/,""); var c=(h[0]||"Y").toUpperCase();
-    $("avatar").textContent=c;
-    // hash handle -> hue for a stable, personal-ish avatar
-    var seed=0; for(var i=0;i<h.length;i++){ seed=(seed*31+h.charCodeAt(i))%360; }
-    $("avatar").style.background="linear-gradient(140deg,hsl("+seed+" 70% 58%),hsl("+((seed+40)%360)+" 72% 52%))";
-  }
+  function effectiveDark(){ var a=document.documentElement.getAttribute("data-theme"); if(a) return a==="dark"; return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches; }
+  function syncThemeBtn(){ var dark=effectiveDark(); $("themeIcon").innerHTML= dark ? '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'; }
+  function toggleTheme(){ var dark=effectiveDark(); document.documentElement.setAttribute("data-theme", dark?"light":"dark"); try{ localStorage.setItem("postlab-theme", dark?"light":"dark"); }catch(e){} syncThemeBtn(); }
 
-  /* ---------------- theme ---------------- */
-  function effectiveDark(){
-    var attr=document.documentElement.getAttribute("data-theme");
-    if(attr) return attr==="dark";
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches;
-  }
-  function syncThemeBtn(){
-    var dark=effectiveDark();
-    $("themeLabel").textContent=dark?"Light":"Dark";
-    $("themeIcon").innerHTML = dark
-      ? '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>'
-      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-  }
-  function toggleTheme(){
-    var dark=effectiveDark();
-    document.documentElement.setAttribute("data-theme", dark?"light":"dark");
-    try{ localStorage.setItem("postlab-theme", dark?"light":"dark"); }catch(e){}
-    syncThemeBtn();
-  }
-
-  /* ---------------- playbook ---------------- */
   var RULES=[
     { k:"reply-weight", t:"<b>A reply is worth about 150x a like.</b> a repost is worth roughly 20x. build every post to earn a comment or a repost, not a passive like." },
     { k:"first-hour", t:"<b>The first 30 to 60 minutes decide everything.</b> early replies and reposts tell the ranker it's worth spreading. reply to every comment while it's fresh." },
@@ -914,49 +836,51 @@
     { k:"specifics", t:"<b>Specific numbers beat vague claims.</b> '52k in 7 months' outperforms 'grew a lot'. real receipts are what make a post believable." },
     { k:"timing", t:"<b>Post when your people are awake.</b> weekday mornings and evenings in your audience's timezone, then stay for the first hour to feed the replies." }
   ];
-  function renderRules(){
-    var box=$("rules"); box.innerHTML="";
-    RULES.forEach(function(r){
-      var d=document.createElement("div"); d.className="rule";
-      d.innerHTML="<div class='rk'>"+r.k+"</div><div class='rt'>"+r.t+"</div>";
-      box.appendChild(d);
-    });
+  function renderRules(){ var box=$("rules"); box.innerHTML=""; RULES.forEach(function(r){ var d=document.createElement("div"); d.className="rule"; d.innerHTML="<div class='rk'>"+r.k+"</div><div class='rt'>"+r.t+"</div>"; box.appendChild(d); }); }
+
+  function loadPrefs(){
+    try{
+      state.key=localStorage.getItem("postlab-gemini-key")||"";
+      state.model=localStorage.getItem("postlab-model")||"gemini-2.5-flash";
+      var eng=localStorage.getItem("postlab-engine");
+      state.engine= eng ? eng : (state.key?"ai":"template");
+      if(state.engine==="ai" && !state.key) state.engine="template";
+    }catch(e){}
   }
+  function savePrefs(){ try{ localStorage.setItem("postlab-gemini-key",state.key||""); localStorage.setItem("postlab-model",state.model||"gemini-2.5-flash"); localStorage.setItem("postlab-engine",state.engine); }catch(e){} }
 
-  /* ---------------- wire up ---------------- */
   function init(){
-    try{ var saved=localStorage.getItem("postlab-theme"); if(saved) document.documentElement.setAttribute("data-theme",saved); }catch(e){}
-    syncThemeBtn();
-    renderRules();
+    try{ var s=localStorage.getItem("postlab-theme"); if(s) document.documentElement.setAttribute("data-theme",s); }catch(e){}
+    syncThemeBtn(); renderRules(); loadPrefs();
 
-    // format segmented
     Array.prototype.forEach.call(document.querySelectorAll("#formatSeg button"), function(b){
-      b.addEventListener("click", function(){
-        state.fmt=b.dataset.fmt;
-        Array.prototype.forEach.call(document.querySelectorAll("#formatSeg button"), function(x){ x.setAttribute("aria-selected", x===b?"true":"false"); });
-        renderTemplateOptions();
-        generate();
-      });
+      b.addEventListener("click", function(){ state.fmt=b.dataset.fmt; Array.prototype.forEach.call(document.querySelectorAll("#formatSeg button"), function(x){ x.setAttribute("aria-selected", x===b?"true":"false"); }); renderTemplateOptions(); seedExample(); });
     });
+    Array.prototype.forEach.call(document.querySelectorAll("#engineSeg button"), function(b){ b.addEventListener("click", function(){ setEngine(b.dataset.eng); }); });
 
-    $("tmpl").addEventListener("change", function(){ state.tmplId=this.value; renderWhyAndFields(); generate(); });
+    $("tmpl").addEventListener("change", function(){ state.tmplId=this.value; renderWhyAndFields(); seedExample(); });
     $("genBtn").addEventListener("click", generate);
     $("shuffleBtn").addEventListener("click", generate);
     $("topic").addEventListener("keydown", function(e){ if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){ generate(); } });
-    document.addEventListener("keydown", function(e){ if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){ generate(); } });
+    document.addEventListener("keydown", function(e){ if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){ generate(); } if(e.key==="Escape"){ closeSettings(); } });
     $("numberToggle").addEventListener("change", function(){ renderTweets(); runSignal(); });
     $("copyAll").addEventListener("click", copyThread);
-    $("handle").addEventListener("input", function(){ setAvatar(); });
+    $("handle").addEventListener("input", setAvatar);
     $("themeBtn").addEventListener("click", toggleTheme);
+    $("settingsBtn").addEventListener("click", openSettings);
+    $("modalClose").addEventListener("click", closeSettings);
+    $("modalBg").addEventListener("click", closeSettings);
+    $("saveKey").addEventListener("click", testKey);
+    $("clearKey").addEventListener("click", function(){ state.key=""; $("keyInput").value=""; setEngine("template"); savePrefs(); mstatus("key cleared. using templates.","muted"); });
+    $("showKey").addEventListener("click", function(){ var k=$("keyInput"); k.type = k.type==="password" ? "text":"password"; });
+    $("modelSel").addEventListener("change", function(){ state.model=this.value; savePrefs(); reflectEngine(); });
     if(window.matchMedia){ try{ window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", syncThemeBtn); }catch(e){} }
 
-    // seed a real, filled example so the tool never opens empty
-    renderTemplateOptions();
-    setAvatar();
+    setEngineButtons(state.engine); reflectEngine();
+    renderTemplateOptions(); setAvatar();
     $("topic").value="building an audience on X";
-    generate();
+    seedExample();
   }
-
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
 </script>
