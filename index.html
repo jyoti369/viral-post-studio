@@ -738,7 +738,7 @@
     return fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key,"HTTP-Referer":location.origin,"X-Title":"PostLab"},body:JSON.stringify(body)}).then(function(r){
       return r.json().catch(function(){return null;}).then(function(data){
         if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")");
-          if(r.status===401) m="that OpenRouter key was rejected, check it in settings.";
+          if(r.status===401) m="OpenRouter did not accept that key. it has to be an OpenRouter key that starts with sk-or- (from openrouter.ai/keys), not your OpenAI sk-proj- key.";
           if(r.status===402) m="this model needs OpenRouter credits. add credits, or pick a free model (id ending in :free).";
           if(r.status===429) m="rate limited, wait a moment and try again.";
           throw new Error(m); }
@@ -916,6 +916,7 @@
   function testORKey(){
     var k=$("orKeyInput").value.trim();
     if(!k){ orstatus("paste a key first.","bad"); return; }
+    if(!/^sk-or-/i.test(k)){ orstatus("that is not an OpenRouter key. get one at openrouter.ai/keys (it starts with sk-or-). your OpenAI sk-proj- key will not work here.","bad"); return; }
     var model=$("orModelInput").value.trim()||"openai/gpt-4o-mini";
     orstatus("checking "+model+"...","muted"); $("saveORKey").disabled=true;
     callOpenRouter('reply with json {"posts":["ok"]}', model, k).then(function(){
