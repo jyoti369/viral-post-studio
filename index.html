@@ -401,7 +401,7 @@
     </div>
 
     <div id="provOR" hidden>
-      <p class="prov-note">gives you GPT, Claude and more from one key. get a key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>. gpt-4o-mini is very cheap, and some models are free.</p>
+      <p class="prov-note">gives you OpenAI, Claude and more from one key. get a key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>. models ending in <b>:free</b> cost nothing and need no credits, including OpenAI's gpt-oss-20b. paid ones like gpt-4o-mini need a few dollars of credit.</p>
       <label class="lb" for="orKeyInput">OpenRouter API key</label>
       <div class="keyrow">
         <input id="orKeyInput" class="inp" type="password" placeholder="sk-or-..." autocomplete="off" spellcheck="false">
@@ -409,14 +409,15 @@
       </div>
       <div class="field" style="margin-top:12px">
         <label class="lb" for="orModelInput">Model <span class="hint">- any id from openrouter.ai/models</span></label>
-        <input id="orModelInput" class="inp" list="orModels" value="openai/gpt-4o-mini" autocomplete="off" spellcheck="false">
+        <input id="orModelInput" class="inp" list="orModels" value="openai/gpt-oss-20b:free" autocomplete="off" spellcheck="false">
         <datalist id="orModels">
+          <option value="openai/gpt-oss-20b:free"></option>
+          <option value="meta-llama/llama-3.3-70b-instruct:free"></option>
+          <option value="qwen/qwen3-next-80b-a3b-instruct:free"></option>
+          <option value="nvidia/nemotron-3-super-120b-a12b:free"></option>
           <option value="openai/gpt-4o-mini"></option>
           <option value="openai/gpt-4o"></option>
-          <option value="openai/gpt-4.1-mini"></option>
           <option value="anthropic/claude-3.5-sonnet"></option>
-          <option value="google/gemini-2.0-flash-001"></option>
-          <option value="deepseek/deepseek-chat-v3-0324:free"></option>
         </datalist>
       </div>
       <div class="mrow">
@@ -436,7 +437,7 @@
 (function(){
   "use strict";
 
-  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-4o-mini", busy:false };
+  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-oss-20b:free", busy:false };
   var $ = function(id){ return document.getElementById(id); };
   function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
   function splitPoints(str){ return (str||"").split("\n").map(function(s){ return s.replace(/^[\-\*•→\d.\)\s]+/,"").trim(); }).filter(Boolean); }
@@ -733,8 +734,9 @@
     });
   }
 
-  function callOpenRouter(promptText, model, key){
-    var body={ model:model||"openai/gpt-4o-mini", temperature:1, messages:[{role:"user",content:promptText}], response_format:{type:"json_object"} };
+  function callOpenRouter(promptText, model, key, noJsonMode){
+    var body={ model:model||"openai/gpt-oss-20b:free", temperature:1, messages:[{role:"user",content:promptText}] };
+    if(!noJsonMode) body.response_format={type:"json_object"};
     return fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key,"HTTP-Referer":location.origin,"X-Title":"PostLab"},body:JSON.stringify(body)}).then(function(r){
       return r.json().catch(function(){return null;}).then(function(data){
         if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")");
@@ -747,6 +749,10 @@
         var msg=data.choices[0].message||{};
         return parsePosts(msg.content||"");
       });
+    }).catch(function(err){
+      // some free models reject structured-output mode; retry once as plain text (the prompt already demands json)
+      if(!noJsonMode && err && /response_format|json_object|structured|not supported|unsupported/i.test(err.message||"")) return callOpenRouter(promptText, model, key, true);
+      throw err;
     });
   }
   function aiGenerate(promptText){
@@ -865,7 +871,7 @@
   function legacyCopy(text){ var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); }
   function copyThread(){ copyText(domTweets().join("\n\n"), $("copyAll")); }
 
-  function openSettings(){ $("keyInput").value=state.key||""; $("modelSel").value=state.model||"gemini-3.5-flash"; if($("orKeyInput")){ $("orKeyInput").value=state.orKey||""; $("orModelInput").value=state.orModel||"openai/gpt-4o-mini"; } reflectProvider(); $("modal").classList.add("open"); }
+  function openSettings(){ $("keyInput").value=state.key||""; $("modelSel").value=state.model||"gemini-3.5-flash"; if($("orKeyInput")){ $("orKeyInput").value=state.orKey||""; $("orModelInput").value=state.orModel||"openai/gpt-oss-20b:free"; } reflectProvider(); $("modal").classList.add("open"); }
   function closeSettings(){ $("modal").classList.remove("open"); }
   function mstatus(msg,kind){ var el=$("mstatus"); el.textContent=msg; el.className="mstatus "+(kind||"muted"); }
   function testKey(){
@@ -917,7 +923,7 @@
     var k=$("orKeyInput").value.trim();
     if(!k){ orstatus("paste a key first.","bad"); return; }
     if(!/^sk-or-/i.test(k)){ orstatus("that is not an OpenRouter key. get one at openrouter.ai/keys (it starts with sk-or-). your OpenAI sk-proj- key will not work here.","bad"); return; }
-    var model=$("orModelInput").value.trim()||"openai/gpt-4o-mini";
+    var model=$("orModelInput").value.trim()||"openai/gpt-oss-20b:free";
     orstatus("checking "+model+"...","muted"); $("saveORKey").disabled=true;
     callOpenRouter('reply with json {"posts":["ok"]}', model, k).then(function(){
       state.orKey=k; state.orModel=model; setProvider("openrouter"); setEngine("ai");
@@ -954,14 +960,14 @@
       if(/^gemini-2\./.test(sm)) sm="gemini-3.5-flash";
       state.model=sm;
       state.orKey=localStorage.getItem("postlab-or-key")||"";
-      state.orModel=localStorage.getItem("postlab-or-model")||"openai/gpt-4o-mini";
+      state.orModel=localStorage.getItem("postlab-or-model")||"openai/gpt-oss-20b:free";
       state.provider=localStorage.getItem("postlab-provider")||"gemini";
       var eng=localStorage.getItem("postlab-engine");
       state.engine= eng ? eng : (currentKey()?"ai":"template");
       if(state.engine==="ai" && !currentKey()) state.engine="template";
     }catch(e){}
   }
-  function savePrefs(){ try{ localStorage.setItem("postlab-gemini-key",state.key||""); localStorage.setItem("postlab-model",state.model||"gemini-3.5-flash"); localStorage.setItem("postlab-or-key",state.orKey||""); localStorage.setItem("postlab-or-model",state.orModel||"openai/gpt-4o-mini"); localStorage.setItem("postlab-provider",state.provider||"gemini"); localStorage.setItem("postlab-engine",state.engine); }catch(e){} }
+  function savePrefs(){ try{ localStorage.setItem("postlab-gemini-key",state.key||""); localStorage.setItem("postlab-model",state.model||"gemini-3.5-flash"); localStorage.setItem("postlab-or-key",state.orKey||""); localStorage.setItem("postlab-or-model",state.orModel||"openai/gpt-oss-20b:free"); localStorage.setItem("postlab-provider",state.provider||"gemini"); localStorage.setItem("postlab-engine",state.engine); }catch(e){} }
 
   function init(){
     try{ var s=localStorage.getItem("postlab-theme"); if(s) document.documentElement.setAttribute("data-theme",s); }catch(e){}
@@ -992,7 +998,7 @@
     $("saveORKey").addEventListener("click", testORKey);
     $("clearORKey").addEventListener("click", function(){ state.orKey=""; $("orKeyInput").value=""; if(state.provider==="openrouter") setEngine("template"); savePrefs(); orstatus("key cleared.","muted"); });
     $("showORKey").addEventListener("click", function(){ var k=$("orKeyInput"); k.type=k.type==="password"?"text":"password"; });
-    $("orModelInput").addEventListener("change", function(){ state.orModel=this.value.trim()||"openai/gpt-4o-mini"; savePrefs(); reflectEngine(); });
+    $("orModelInput").addEventListener("change", function(){ state.orModel=this.value.trim()||"openai/gpt-oss-20b:free"; savePrefs(); reflectEngine(); });
     if(window.matchMedia){ try{ window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", syncThemeBtn); }catch(e){} }
 
     setEngineButtons(state.engine); reflectProvider(); reflectEngine();

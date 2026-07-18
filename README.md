@@ -12,7 +12,7 @@ most post generators spit out stuff that reads like a bot wrote it. em dashes ev
 
 - templates: free, instant, offline. a proven set of viral structures with your topic and specifics slotted in. no key, nothing to set up.
 - gemini (free): paste a free gemini key and it writes each post fresh for your topic. uses gemini 3.x flash (free tier) and auto-falls-back if google gates a model for new keys.
-- openrouter (gpt, claude, more): paste an openrouter key and pick a model like openai/gpt-4o-mini. gpt costs a small amount of credits, some models are free.
+- openrouter (openai, claude, more): paste an openrouter key. the default model is openai/gpt-oss-20b:free, which is an actual OpenAI model that costs nothing and needs no credits. paid models like gpt-4o-mini work too if you add a few dollars of credit.
 
 either way the voice rules go into the prompt (no em dashes, no robot words) and the scrubber runs on top of whatever the model returns, so AI output stays clean too. keys are stored only in your browser and go straight to the provider, never to any server of mine. openai's own api can't be called directly from a static page (it blocks browser requests), which is why gpt goes through openrouter instead.
 
