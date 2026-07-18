@@ -18,7 +18,8 @@ either way the voice rules go into the prompt (no em dashes, no robot words) and
 
 ## what's inside
 
-- single posts and threads, 12 templates grouped by goal: hot take, before/after proof, listicle, how-to, question, launch, hiring, plus story, contrarian and case-study threads
+- two modes: **normal post** (topic in, post out) and **opportunity post** (paste a screenshot of a job or gig and it produces the bracketed hiring format: [Hiring Role ($pay)] with • skills and → work lines, apply link kept for the first reply). the screenshot path needs an AI key since a model reads the image; there's a manual fill-in fallback that needs nothing.
+- single posts and threads across general templates (hot take, before/after proof, listicle, question, launch, story, contrarian, case study) plus software-dev ones (debug war story, dev tip, system design breakdown)
 - a reach signal score out of 100 that grades each post against how X actually ranks in 2026. replies count far more than likes, links belong in the first reply not the post, no all-caps, and so on
 - everything in the preview is editable, so you fix it in your own voice before posting
 - copy per post or the whole thread at once, dark and light, works on your phone

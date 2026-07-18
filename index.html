@@ -114,8 +114,20 @@
     background-repeat:no-repeat;background-position:right 12px center}
   select.sel:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%, transparent)}
 
-  .why{margin-top:9px;font-size:12.5px;line-height:1.5;color:var(--muted);background:var(--bg-3);border-left:2.5px solid var(--accent);border-radius:0 8px 8px 0;padding:9px 11px}
+  .why{margin-top:8px;font-size:12px;line-height:1.45;color:var(--muted);background:var(--bg-3);border-left:2.5px solid var(--accent);border-radius:0 8px 8px 0;padding:7px 10px}
   .why b{color:var(--text);font-weight:650}
+
+  .dropzone{position:relative;border:1.5px dashed var(--line);border-radius:12px;background:var(--bg-3);min-height:96px;display:grid;place-items:center;cursor:pointer;transition:border-color .15s,background .15s;overflow:hidden;padding:10px}
+  .dropzone:hover,.dropzone:focus-visible,.dropzone.drag{border-color:var(--accent);background:var(--bg-2);outline:none}
+  .dz-empty{display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--faint);font-size:12.5px;pointer-events:none}
+  .dz-empty svg{width:26px;height:26px;opacity:.7}
+  #dzPreview{max-width:100%;max-height:180px;border-radius:8px;display:block}
+  .dz-clear{position:absolute;top:8px;right:8px;background:var(--bg-2)}
+  details.manual{margin-top:4px}
+  details.manual summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:650;color:var(--accent-text)}
+  details.manual summary::-webkit-details-marker{display:none}
+  details.manual summary::before{content:"+ "}
+  details.manual[open] summary::before{content:"- "}
 
   .extra{display:grid;gap:11px}
   .extra:empty{display:none}
@@ -283,43 +295,76 @@
       <div><h1>PostLab</h1><p>topic in, viral X post out. no em dashes, no robot voice.</p></div>
     </div>
     <div class="spacer"></div>
-    <button class="ghost" id="settingsBtn" title="AI writer settings"><span class="dot" id="engDot"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span id="engLabel">Templates</span></button>
+    <button class="ghost" id="writerChip" title="Switch writer (templates / AI)"><span class="dot" id="engDot"></span><span id="engLabel">Templates</span></button>
+    <button class="ghost icon" id="settingsBtn" title="AI writer settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
     <button class="ghost icon" id="themeBtn" title="Switch theme"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
   </header>
 
   <div class="grid">
     <section class="panel controls">
-      <p class="eyebrow">Compose</p>
-      <div class="field">
-        <label class="lb" for="topic">What is it about?</label>
-        <input id="topic" class="topic" placeholder="cold email, learning python, hiring, your launch..." autocomplete="off" spellcheck="false">
+      <div class="seg" role="tablist" id="modeSeg" style="margin-bottom:16px">
+        <button role="tab" aria-selected="true" data-mode="post"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Normal post</button>
+        <button role="tab" aria-selected="false" data-mode="opp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Opportunity post</button>
       </div>
-      <div class="field">
-        <label class="lb">Format</label>
-        <div class="seg" role="tablist" id="formatSeg">
-          <button role="tab" aria-selected="true" data-fmt="single"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>Single post</button>
-          <button role="tab" aria-selected="false" data-fmt="thread"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="10.5" width="18" height="6" rx="1.5"/><rect x="7" y="18" width="14" height="3.5" rx="1.5"/></svg>Thread</button>
+
+      <div id="postControls">
+        <div class="field">
+          <label class="lb" for="topic">What is it about?</label>
+          <input id="topic" class="topic" placeholder="rate limiting, cold email, your launch..." autocomplete="off" spellcheck="false">
         </div>
-      </div>
-      <div class="field">
-        <label class="lb" for="tmpl">Viral template</label>
-        <select id="tmpl" class="sel"></select>
-        <div class="why" id="why"></div>
-      </div>
-      <div class="field extra" id="extra"></div>
-      <div class="field">
-        <label class="lb">Writer</label>
-        <div class="seg mini" id="engineSeg">
-          <button data-eng="template" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Templates</button>
-          <button data-eng="ai" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15z"/></svg>AI writer</button>
+        <div class="field">
+          <label class="lb">Format</label>
+          <div class="seg" role="tablist" id="formatSeg">
+            <button role="tab" aria-selected="true" data-fmt="single"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>Single post</button>
+            <button role="tab" aria-selected="false" data-fmt="thread"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="10.5" width="18" height="6" rx="1.5"/><rect x="7" y="18" width="14" height="3.5" rx="1.5"/></svg>Thread</button>
+          </div>
         </div>
-        <div class="mode-hint" id="modeHint"></div>
+        <div class="field">
+          <label class="lb" for="tmpl">Template</label>
+          <select id="tmpl" class="sel"></select>
+          <div class="why" id="why"></div>
+        </div>
+        <div class="field extra" id="extra"></div>
       </div>
+
+      <div id="oppControls" hidden>
+        <div class="field">
+          <label class="lb">Screenshot of the opportunity <span class="hint">- paste (Cmd+V), drop, or click</span></label>
+          <div class="dropzone" id="dropzone" tabindex="0">
+            <div class="dz-empty" id="dzEmpty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span>paste a job/gig screenshot here</span>
+            </div>
+            <img id="dzPreview" alt="" hidden>
+            <button class="mini dz-clear" id="dzClear" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg><span>Remove</span></button>
+          </div>
+          <input type="file" id="dzFile" accept="image/*" hidden>
+        </div>
+        <div class="field">
+          <label class="lb" for="oppText">Or paste the text of it <span class="hint">- optional if you gave a screenshot</span></label>
+          <textarea id="oppText" class="ta" placeholder="paste the job description / DM / email here"></textarea>
+        </div>
+        <div class="field">
+          <label class="lb" for="oppLink">Apply link <span class="hint">- goes in the first reply</span></label>
+          <input id="oppLink" class="inp" placeholder="t.mercor.com/xxxx" autocomplete="off" spellcheck="false">
+        </div>
+        <details class="manual">
+          <summary>no AI key? fill it in manually</summary>
+          <div class="extra" style="margin-top:11px">
+            <div class="two">
+              <div><label class="lb" for="oppRole">role</label><input id="oppRole" class="inp" placeholder="Software Engineers"></div>
+              <div><label class="lb" for="oppPay">pay</label><input id="oppPay" class="inp" placeholder="$40-50/hr"></div>
+            </div>
+            <div><label class="lb" for="oppSkills">skills <span class="hint">- one per line</span></label><textarea id="oppSkills" class="ta" placeholder="APIs & backend systems&#10;Docker / Linux&#10;MCP / AI tooling (bonus)"></textarea></div>
+            <div><label class="lb" for="oppIncludes">work includes <span class="hint">- one per line</span></label><textarea id="oppIncludes" class="ta" placeholder="Building MCP servers&#10;Integrating apps with AI workflows"></textarea></div>
+          </div>
+        </details>
+      </div>
+
       <div class="actions">
         <button class="btn primary" id="genBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3z"/></svg><span id="genLabel">Generate</span></button>
         <button class="btn sub" id="shuffleBtn" title="New variation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
       </div>
-      <p class="kbd"><b>Cmd/Ctrl + Enter</b> to generate</p>
     </section>
 
     <section class="stack">
@@ -437,7 +482,8 @@
 (function(){
   "use strict";
 
-  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-oss-20b:free", busy:false };
+  var state = { mode:"post", fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-oss-20b:free", busy:false };
+  var oppImg=null; // {mime, data} of the pasted screenshot
   var $ = function(id){ return document.getElementById(id); };
   function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
   function splitPoints(str){ return (str||"").split("\n").map(function(s){ return s.replace(/^[\-\*•→\d.\)\s]+/,"").trim(); }).filter(Boolean); }
@@ -452,6 +498,8 @@
     timeframe:{label:"how long it took", ph:"7 months"},
     lever:{label:"the one thing that worked", ph:"posting one real story a day"},
     points:{type:"ta", label:"your points", hint:"one per line, i format the rest", ph:"write your key points here\none per line\nleave blank to get a fill-in scaffold"},
+    hours:{label:"how long it held you hostage", ph:"6 hours"},
+    fix:{label:"what it turned out to be", ph:"a timezone bug in the cache key"},
     oneLiner:{label:"what it does, in one line", ph:"turns messy notes into posts people actually read"},
     link:{label:"link", hint:"goes in the first reply, never the post", ph:"yoursite.com"},
     role:{label:"role", ph:"Software Engineer"},
@@ -496,14 +544,25 @@
         var body=(pts.length?pts:["[point one]","[point two]","[point three]","[point four]","[point five]"]).map(function(x,i){return (i+1)+". "+x;}).join("\n");
         return head+"\n\n"+body+"\n\nwhich one hits hardest for you?";
       } },
-    { id:"howto", name:"How-to (mini guide)", goal:"Value", fields:["points"],
-      why:"practical and immediately usable, so people save and share it. give it your steps or ship the scaffold and fill it in.",
-      aiBrief:"a compact how-to post. a hook line, then numbered steps (3 to 6), each step short and actionable. end with a save-it nudge.",
+    { id:"bug-story", name:"Debug war story", goal:"Software dev", fields:["hours","fix"],
+      why:"every dev has lived this. pain plus a one-line fix is the most relatable dev content on X, and relatable gets reposted.",
+      aiBrief:"a debugging war story. how long the bug took, the absurd hunt, then the tiny fix it turned out to be. self-deprecating, funny, ends asking others for their worst one.",
       build:function(c){ var t=c.t,f=c.f,p=c.p;
-        var pts=splitPoints(f.points); var steps=pts.length?pts:["[step one]","[step two]","[step three]"];
-        var head=p(["how to "+t+", the no-fluff version:","the simplest way to "+t+" i've found:",steps.length+" steps to "+t+":"],0);
-        var body=steps.map(function(x,i){return (i+1)+". "+x;}).join("\n");
-        return head+"\n\n"+body+"\n\nsave this for when you actually need it.";
+        var hrs=f.hours||"6 hours", fix=f.fix||"[what it turned out to be]";
+        return p([
+          "spent "+hrs+" debugging "+t+".\n\nrewrote half the module. blamed the library. questioned my career.\n\nthe fix: "+fix+".\n\none line.\n\nwhat's the longest a one-liner has ever held you hostage?",
+          hrs+" of my life gone to a "+t+" bug.\n\nchecked everything twice. it worked locally, obviously.\n\nturned out to be "+fix+".\n\ndrop your worst one below, i need to feel less alone."
+        ],0);
+      } },
+    { id:"dev-tip", name:"Dev tip (bookmark-bait)", goal:"Software dev", fields:["points"],
+      why:"devs bookmark concrete tips and tools more than any other content. one specific trick beats ten vague ones.",
+      aiBrief:"one concrete, underrated software engineering tip about the topic. specific enough to use today, with a tiny example or command if it fits. end with a save nudge or a 'what do you use' question.",
+      build:function(c){ var t=c.t,f=c.f,p=c.p;
+        var pts=splitPoints(f.points); var body=pts.length?pts.map(function(x,i){return (i+1)+". "+x;}).join("\n"):"[the trick, concrete enough to use today]";
+        return p([
+          "underrated "+t+" trick most devs skip:\n\n"+body+"\n\nsave this, you'll need it sooner than you think.",
+          "the "+t+" tip i wish someone gave me years ago:\n\n"+body+"\n\nwhat's yours? genuinely collecting these."
+        ],0);
       } },
     { id:"ask", name:"Question (reply-bait)", goal:"Engagement", fields:[],
       why:"an easy, honest question is the cheapest way to start a conversation, and conversation is the signal the algorithm rewards most.",
@@ -518,17 +577,15 @@
         var one=f.oneLiner||"[what it does, in one honest line]";
         return "just shipped something for "+t+".\n\n"+one+".\n\nbuilt it because i needed it and couldn't find anything that didn't get in the way. would love your honest take, good or brutal.\n\n(link in the first reply)";
       } },
-    { id:"hiring", name:"Hiring / opportunity", goal:"Recruiting", fields:["role","pay","skills","includes","link"],
-      why:"the bracketed headline plus clean bullets scans in a second and gets reposted into other people's networks. this is the format from your pinned post.",
-      aiBrief:"a hiring or opportunity post. bracketed headline like [Hiring role], then a short bullet list of must-have skills, then what the work includes, then the terms (remote, contract, pay), then an apply nudge. clean and scannable, keep any link out of the post body.",
-      build:function(c){ var t=c.t,f=c.f;
-        var role=f.role||t||"[role]"; var pay=f.pay?(" ("+f.pay+")"):"";
-        var skills=splitPoints(f.skills), inc=splitPoints(f.includes);
-        var sk=(skills.length?skills:["[skill]","[skill]","[skill]"]).map(function(s){return "• "+s;}).join("\n");
-        var ic=(inc.length?inc:["[what they'll build]","[what they'll build]"]).map(function(s){return "→ "+s;}).join("\n");
-        return "[Hiring "+cap(role)+pay+"]\n\nlooking for experience in:\n\n"+sk+"\n\nwork includes:\n\n"+ic+"\n\nremote contract work.\n\napply below 👇";
-      } }
   ];
+
+  // the pinned-post hiring format, used by Opportunity mode's manual path
+  function buildOppManual(role, pay, skills, includes){
+    var payStr=pay?(" ("+pay+")"):"";
+    var sk=(splitPoints(skills).length?splitPoints(skills):["[skill]","[skill]","[skill]"]).map(function(s){return "• "+s;}).join("\n");
+    var ic=(splitPoints(includes).length?splitPoints(includes):["[what the work is]","[what the work is]"]).map(function(s){return "→ "+s;}).join("\n");
+    return "[Hiring "+cap(role||"[role]")+payStr+"]\n\nLooking for experience in:\n\n"+sk+"\n\nWork includes:\n\n"+ic+"\n\nRemote contract work.\n\nApply 👇";
+  }
 
   var THREAD = [
     { id:"t-howto", name:"Step-by-step guide", goal:"Authority", fields:["points"], threadLen:"6 to 9",
@@ -566,6 +623,18 @@
         var hook=p(["everything you've been told about "+t+" is backwards.\n\nlet me show you what actually works 🧵","the popular advice on "+t+" is quietly wasting your time.\n\nhere's the version that works 🧵"],0);
         var mid=["the advice everyone repeats:\n\n"+p(["do more, hustle harder, grind it out.","copy the exact steps that worked for someone with a totally different starting point.","wait until you're an expert before you start."],1),"why it fails:\n\nit skips the one thing that actually moves the needle for "+t+", and quietly wastes the months you can't get back."];
         return [hook].concat(mid,fixes.map(function(x,i){return "what to do instead, "+(i+1)+":\n\n"+x;}),[CTA(t,f,p,h)]);
+      } },
+    { id:"t-sysdesign", name:"System design breakdown", goal:"Software dev", fields:["points"], threadLen:"6 to 9",
+      why:"explaining how real systems work under the hood is the highest-authority dev content on X. engineers bookmark these obsessively.",
+      aiBrief:"a system design breakdown thread. hook: most devs use this every day and couldn't explain how it works. then walk the mechanism step by step, one concept per post, each with a concrete number or example (latencies, limits, real services that use it). end with a takeaway and CTA.",
+      build:function(c){ var t=c.t,f=c.f,p=c.p,h=c.h;
+        var pts=splitPoints(f.points);
+        var use=pts.length?pts:["[the core mechanism, one line]","[what happens on the hot path]","[the failure mode nobody expects]","[how the big players do it]","[the tradeoff that decides your design]"];
+        var hook=p([
+          "most devs use "+t+" every single day.\n\nalmost none could explain how it actually works.\n\nlet's fix that in "+use.length+" posts 🧵",
+          t+" looks simple from the outside.\n\nunder the hood it's one of the smartest designs in your stack.\n\nhere's the breakdown 🧵"
+        ],0);
+        return [hook].concat(use.map(function(s,i){return (i+1)+". "+s;}),[CTA(t,f,p,h)]);
       } },
     { id:"t-case", name:"Case study (results)", goal:"Authority", fields:["before","after","timeframe","lever","points"], threadLen:"7 to 9",
       why:"a real result up top buys attention, then the exact steps pay it off. concrete numbers plus a repeatable method is the most trusted shape.",
@@ -616,6 +685,7 @@
   function collectFields(){ var f={}, tp=currentTmpl(); (tp.fields||[]).forEach(function(k){ var el=$("f_"+k); f[k]=el?el.value.trim():""; }); return f; }
 
   function generate(){
+    if(state.mode==="opp"){ generateOpp(); return; }
     var topic=$("topic").value.trim();
     if(!topic){ var ti=$("topic"); ti.classList.remove("shake"); void ti.offsetWidth; ti.classList.add("shake"); ti.focus(); return; }
     if(state.busy) return;
@@ -695,15 +765,100 @@
     return L.join("\n");
   }
 
+  function buildOppPrompt(hasImage, rawText){
+    var L=[];
+    L.push("you turn job and gig opportunities into one specific X (twitter) post format. read the "+(hasImage?(rawText?"screenshot and the text":"screenshot"):"text")+" i'm giving you and pull out: the role, pay (only if stated), the skills they want, what the work involves, the arrangement (remote, contract, full time), and the application link if visible.");
+    L.push("");
+    L.push("then write ONE complete multi-line post. here is an example of the EXACT format, for a different job. copy this shape line for line, blank lines included:");
+    L.push("");
+    L.push("[Hiring Software Engineers ($40-$50/hr)]");
+    L.push("");
+    L.push("Looking for experience in:");
+    L.push("");
+    L.push("• APIs & backend systems");
+    L.push("• Docker / Linux");
+    L.push("• MCP / AI tooling (bonus)");
+    L.push("");
+    L.push("Work includes:");
+    L.push("");
+    L.push("→ Building MCP servers");
+    L.push("→ Integrating apps with AI workflows");
+    L.push("");
+    L.push("Remote contract work.");
+    L.push("");
+    L.push("Apply 👇");
+    L.push("");
+    L.push("that whole thing, headline to 'Apply 👇', is ONE post: a single json string with real line breaks in it. never return just the headline.");
+    L.push("");
+    L.push("rules:");
+    L.push("- 3 to 5 skill bullets with •, 2 to 3 work lines with →. mark genuine nice-to-haves with (bonus).");
+    L.push("- if pay isn't stated in the source, drop the ({pay}) part. NEVER invent pay, company names, or numbers that aren't in the source.");
+    L.push("- if the source has nothing for a section, drop that section rather than making something up.");
+    L.push("- keep every line short and plain. no hashtags, no em dashes or en dashes, no corporate fluff words.");
+    L.push("- do NOT put the application link inside the post text. return it separately.");
+    if(rawText){ L.push(""); L.push("the text of the opportunity:"); L.push(rawText); }
+    L.push("");
+    L.push("return json only: {\"posts\":[\"the finished post\"], \"link\":\"the application url if you saw one, else an empty string\"}");
+    return L.join("\n");
+  }
+
+  function generateOpp(){
+    if(state.busy) return;
+    var text=$("oppText").value.trim();
+    var linkOverride=$("oppLink").value.trim();
+    var hasSrc=!!(oppImg||text);
+    if(hasSrc && currentKey()){
+      state.gen++; setBusy(true);
+      aiGenerate(buildOppPrompt(!!oppImg, text), oppImg).then(function(posts){
+        var extracted=posts.link||"";
+        var clean=posts.map(sanitize).filter(Boolean);
+        if(!clean.length) throw new Error("the model returned an empty post, try again");
+        state.link=linkOverride||extracted||"";
+        state.tweets=[clean[0]]; // opportunity is always one post
+        renderTweets(); runSignal();
+      }).catch(function(err){ showError((err&&err.message)?err.message:"generation failed"); }).then(function(){ setBusy(false); });
+      return;
+    }
+    if(hasSrc && !currentKey()){ openSettings(); showError("reading a screenshot needs an AI key (gemini is free, takes a minute). or open 'fill it in manually' below the drop zone."); return; }
+    // manual path, no AI involved
+    var role=$("oppRole").value.trim(), pay=$("oppPay").value.trim();
+    var skills=$("oppSkills").value, inc=$("oppIncludes").value;
+    if(!role && !splitPoints(skills).length){ showError("give me a screenshot, the text of the opportunity, or open 'fill it in manually'."); return; }
+    state.link=linkOverride||"";
+    state.tweets=[sanitize(buildOppManual(role,pay,skills,inc))];
+    renderTweets(); runSignal();
+  }
+
+  /* ---------- opportunity image handling ---------- */
+  function setOppImg(dataUrl){
+    var m=String(dataUrl).match(/^data:(image\/[a-z0-9+.-]+);base64,([\s\S]+)$/i);
+    if(!m) return;
+    oppImg={mime:m[1], data:m[2]};
+    $("dzPreview").src=dataUrl; $("dzPreview").hidden=false;
+    $("dzEmpty").hidden=true; $("dzClear").hidden=false;
+  }
+  function clearOppImg(){ oppImg=null; $("dzPreview").hidden=true; $("dzPreview").removeAttribute("src"); $("dzEmpty").hidden=false; $("dzClear").hidden=true; }
+  function fileToImg(file){ if(!file || String(file.type).indexOf("image/")!==0) return; var r=new FileReader(); r.onload=function(){ setOppImg(String(r.result)); }; r.readAsDataURL(file); }
+
+  function setMode(m){
+    state.mode=m;
+    Array.prototype.forEach.call(document.querySelectorAll("#modeSeg button"), function(b){ b.setAttribute("aria-selected", b.dataset.mode===m?"true":"false"); });
+    $("postControls").hidden = m!=="post";
+    $("oppControls").hidden = m!=="opp";
+    $("genLabel").textContent="Generate";
+  }
+
   function currentKey(){ return state.provider==="openrouter" ? state.orKey : state.key; }
   function parsePosts(text){
     text=String(text||"").trim();
     text=text.replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"").trim();
-    var posts=null;
-    try{ var p=JSON.parse(text); if(p&&p.posts) posts=p.posts; else if(Array.isArray(p)) posts=p; }catch(e){}
-    if(!posts){ var mm=text.match(/\{[\s\S]*\}/); if(mm){ try{ var p2=JSON.parse(mm[0]); if(p2&&p2.posts) posts=p2.posts; }catch(e){} } }
+    var posts=null, link="";
+    try{ var p=JSON.parse(text); if(p&&p.posts){ posts=p.posts; if(p.link) link=String(p.link); } else if(Array.isArray(p)) posts=p; }catch(e){}
+    if(!posts){ var mm=text.match(/\{[\s\S]*\}/); if(mm){ try{ var p2=JSON.parse(mm[0]); if(p2&&p2.posts){ posts=p2.posts; if(p2.link) link=String(p2.link); } }catch(e){} } }
     if(!posts||!posts.length){ if(!text) throw new Error("the model returned an empty response, try again"); posts=[text]; }
-    return posts.map(function(x){return String(x);});
+    var arr=posts.map(function(x){return String(x);});
+    arr.link=link; // opportunity mode reads the extracted apply link off the array
+    return arr;
   }
   function modelCandidates(){
     var avail=state.models||[], list=[];
@@ -715,20 +870,22 @@
     return list.slice(0,5);
   }
   function isUnavailable(err){ return !!(err && (err.status===404 || /404|not found|not available|no longer available|not_found|is not supported/i.test(err.message||""))); }
-  function generateWithFallback(prompt, candidates, i){
+  function generateWithFallback(prompt, candidates, i, img){
     var model=candidates[i];
     if(!model) return Promise.reject(new Error("none of your available models accepted the request. open settings and pick a different model."));
-    return callGemini(prompt, model).then(function(posts){ return { posts:posts, model:model }; }).catch(function(err){
-      if(i+1<candidates.length && isUnavailable(err)) return generateWithFallback(prompt, candidates, i+1);
+    return callGemini(prompt, model, img).then(function(posts){ return { posts:posts, model:model }; }).catch(function(err){
+      if(i+1<candidates.length && isUnavailable(err)) return generateWithFallback(prompt, candidates, i+1, img);
       throw err;
     });
   }
-  function callGemini(promptText, model){
+  function callGemini(promptText, model, img){
     var useModel=model||state.model;
     var url="https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(useModel)+":generateContent?key="+encodeURIComponent(state.key);
-    var body={ contents:[{role:"user",parts:[{text:promptText}]}],
+    var parts=[{text:promptText}];
+    if(img) parts.push({inline_data:{mime_type:img.mime,data:img.data}});
+    var body={ contents:[{role:"user",parts:parts}],
       generationConfig:{ temperature:1.05, maxOutputTokens:8192, responseMimeType:"application/json",
-        responseSchema:{ type:"OBJECT", properties:{ posts:{ type:"ARRAY", items:{ type:"STRING" } } }, required:["posts"] } } };
+        responseSchema:{ type:"OBJECT", properties:{ posts:{ type:"ARRAY", items:{ type:"STRING" } }, link:{ type:"STRING" } }, required:["posts"] } } };
     return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){
       return r.json().catch(function(){return null;}).then(function(data){
         if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")"); if(r.status===429) m="hit the free-tier rate limit. wait a minute, or switch to gemini-3.1-flash-lite in settings."; var ge=new Error(m); ge.status=r.status; throw ge; }
@@ -743,8 +900,11 @@
     });
   }
 
-  function callOpenRouter(promptText, model, key, noJsonMode){
-    var body={ model:model||"openai/gpt-oss-20b:free", temperature:1, messages:[{role:"user",content:promptText}] };
+  function callOpenRouter(promptText, model, key, noJsonMode, img){
+    var content = img
+      ? [{type:"text",text:promptText},{type:"image_url",image_url:{url:"data:"+img.mime+";base64,"+img.data}}]
+      : promptText;
+    var body={ model:model||"openai/gpt-oss-20b:free", temperature:1, messages:[{role:"user",content:content}] };
     if(!noJsonMode) body.response_format={type:"json_object"};
     return fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key,"HTTP-Referer":location.origin,"X-Title":"PostLab"},body:JSON.stringify(body)}).then(function(r){
       return r.json().catch(function(){return null;}).then(function(data){
@@ -760,15 +920,15 @@
       });
     }).catch(function(err){
       // some free models reject structured-output mode; retry once as plain text (the prompt already demands json)
-      if(!noJsonMode && err && /response_format|json_object|structured|not supported|unsupported/i.test(err.message||"")) return callOpenRouter(promptText, model, key, true);
+      if(!noJsonMode && err && /response_format|json_object|structured|not supported|unsupported/i.test(err.message||"")) return callOpenRouter(promptText, model, key, true, img);
       throw err;
     });
   }
-  function aiGenerate(promptText){
-    if(state.provider==="openrouter") return callOpenRouter(promptText, state.orModel, state.orKey);
-    return generateWithFallback(promptText, modelCandidates(), 0).then(function(res){
+  function aiGenerate(promptText, img){
+    if(state.provider==="openrouter") return callOpenRouter(promptText, state.orModel, state.orKey, false, img);
+    return generateWithFallback(promptText, modelCandidates(), 0, img).then(function(res){
       if(res.model!==state.model){ state.model=res.model; savePrefs(); reflectEngine(); var ms=$("modelSel"); if(ms) ms.value=res.model; }
-      return res.posts;
+      var posts=res.posts; return posts;
     });
   }
   // models can't count characters. if anything comes back over 280, send it once for a compression rewrite.
@@ -935,11 +1095,9 @@
   function reflectEngine(){
     var ai=state.engine==="ai";
     $("engDot").className="dot"+(ai?" on":"");
-    $("engLabel").textContent= ai ? "AI on" : "Templates";
-    var who=state.provider==="openrouter" ? (state.orModel||"gpt") : (state.model||"gemini");
-    $("modeHint").innerHTML = ai
-      ? "writing each post fresh with <b>"+escapeHtml(who)+"</b>. your key, your call."
-      : "free and instant, runs offline from a proven set of viral structures. add a key in <b>settings</b> for fresh AI writing.";
+    var who=state.provider==="openrouter" ? String(state.orModel||"ai").split("/").pop().replace(/:free$/," (free)") : (state.model||"gemini");
+    $("engLabel").textContent= ai ? ("AI: "+who) : "Templates";
+    $("writerChip").title= ai ? "writing with "+who+". click to switch to templates" : "click to switch to the AI writer";
   }
 
   function setProvider(p){ state.provider=p; savePrefs(); reflectProvider(); reflectEngine(); }
@@ -1005,7 +1163,22 @@
     Array.prototype.forEach.call(document.querySelectorAll("#formatSeg button"), function(b){
       b.addEventListener("click", function(){ state.fmt=b.dataset.fmt; Array.prototype.forEach.call(document.querySelectorAll("#formatSeg button"), function(x){ x.setAttribute("aria-selected", x===b?"true":"false"); }); renderTemplateOptions(); seedExample(); });
     });
-    Array.prototype.forEach.call(document.querySelectorAll("#engineSeg button"), function(b){ b.addEventListener("click", function(){ setEngine(b.dataset.eng); }); });
+    Array.prototype.forEach.call(document.querySelectorAll("#modeSeg button"), function(b){ b.addEventListener("click", function(){ setMode(b.dataset.mode); }); });
+    $("writerChip").addEventListener("click", function(){ if(!currentKey()){ openSettings(); return; } setEngine(state.engine==="ai"?"template":"ai"); });
+    // opportunity image: click, drop, paste, clear
+    var dz=$("dropzone");
+    dz.addEventListener("click", function(e){ if(e.target.closest("#dzClear")) return; $("dzFile").click(); });
+    dz.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); $("dzFile").click(); } });
+    $("dzFile").addEventListener("change", function(){ fileToImg(this.files&&this.files[0]); this.value=""; });
+    $("dzClear").addEventListener("click", function(e){ e.stopPropagation(); clearOppImg(); });
+    ["dragover","dragenter"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add("drag"); }); });
+    ["dragleave","drop"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove("drag"); }); });
+    dz.addEventListener("drop", function(e){ var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; fileToImg(f); });
+    document.addEventListener("paste", function(e){
+      if(state.mode!=="opp") return;
+      var items=(e.clipboardData||{}).items||[];
+      for(var i=0;i<items.length;i++){ if(items[i].type&&items[i].type.indexOf("image/")===0){ e.preventDefault(); fileToImg(items[i].getAsFile()); return; } }
+    });
 
     $("tmpl").addEventListener("change", function(){ state.tmplId=this.value; renderWhyAndFields(); seedExample(); });
     $("genBtn").addEventListener("click", generate);
