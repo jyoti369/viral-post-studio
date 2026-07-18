@@ -265,6 +265,8 @@
   .mbtn.primary[disabled]{opacity:.7;cursor:default}
   .mbtn.ghost{background:var(--bg-3);border:1px solid var(--line);color:var(--text)}
   .mnote{font-size:11.5px;color:var(--faint);margin-top:14px;line-height:1.5;border-top:1px solid var(--line-soft);padding-top:12px}
+  .prov-note{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+  .prov-note a{font-weight:650}
 
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg-2);padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70;display:flex;align-items:center;gap:9px}
   .toast svg{width:16px;height:16px;color:var(--good)}
@@ -309,7 +311,7 @@
         <label class="lb">Writer</label>
         <div class="seg mini" id="engineSeg">
           <button data-eng="template" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Templates</button>
-          <button data-eng="ai" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15z"/></svg>AI (Gemini)</button>
+          <button data-eng="ai" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15z"/></svg>AI writer</button>
         </div>
         <div class="mode-hint" id="modeHint"></div>
       </div>
@@ -367,27 +369,64 @@
   <div class="modal-card">
     <button class="mclose" id="modalClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
     <h2>AI writer (optional)</h2>
-    <p class="sub">paste a free Gemini API key and the tool writes each post fresh for your topic instead of using templates. get one in a minute at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>. the tool uses gemini 3.x flash models, which are on the free tier.</p>
-    <label class="lb" for="keyInput">Gemini API key</label>
-    <div class="keyrow">
-      <input id="keyInput" class="inp" type="password" placeholder="AIza..." autocomplete="off" spellcheck="false">
-      <button class="showbtn" id="showKey" title="Show/hide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    <p class="sub">write each post fresh with a real model instead of templates. pick a provider and paste its key. keys stay in your browser and go straight to the provider, never to me.</p>
+
+    <label class="lb">Provider</label>
+    <div class="seg mini" id="providerSeg" style="margin-bottom:14px">
+      <button data-prov="gemini" aria-selected="true">Gemini (free)</button>
+      <button data-prov="openrouter" aria-selected="false">OpenRouter (GPT, Claude)</button>
     </div>
-    <div class="mrow">
-      <button class="mbtn primary" id="saveKey">Save and test</button>
-      <button class="mbtn ghost" id="clearKey">Clear</button>
+
+    <div id="provGemini">
+      <p class="prov-note">free tier. get a key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>. uses gemini 3.x flash models.</p>
+      <label class="lb" for="keyInput">Gemini API key</label>
+      <div class="keyrow">
+        <input id="keyInput" class="inp" type="password" placeholder="AIza..." autocomplete="off" spellcheck="false">
+        <button class="showbtn" id="showKey" title="Show/hide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+      <div class="mrow">
+        <button class="mbtn primary" id="saveKey">Save and test</button>
+        <button class="mbtn ghost" id="clearKey">Clear</button>
+      </div>
+      <div class="mstatus muted" id="mstatus">not connected.</div>
+      <div class="field" style="margin-top:14px">
+        <label class="lb" for="modelSel">Model</label>
+        <select id="modelSel" class="sel">
+          <option value="gemini-3.5-flash">gemini-3.5-flash (recommended)</option>
+          <option value="gemini-flash-latest">gemini-flash-latest (always current)</option>
+          <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (fastest)</option>
+          <option value="gemini-3-flash-preview">gemini-3-flash-preview</option>
+        </select>
+      </div>
     </div>
-    <div class="mstatus muted" id="mstatus">not connected. the tool falls back to templates.</div>
-    <div class="field" style="margin-top:16px">
-      <label class="lb" for="modelSel">Model</label>
-      <select id="modelSel" class="sel">
-        <option value="gemini-3.5-flash">gemini-3.5-flash (recommended)</option>
-        <option value="gemini-flash-latest">gemini-flash-latest (always current)</option>
-        <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (fastest)</option>
-        <option value="gemini-3-flash-preview">gemini-3-flash-preview</option>
-      </select>
+
+    <div id="provOR" hidden>
+      <p class="prov-note">gives you GPT, Claude and more from one key. get a key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>. gpt-4o-mini is very cheap, and some models are free.</p>
+      <label class="lb" for="orKeyInput">OpenRouter API key</label>
+      <div class="keyrow">
+        <input id="orKeyInput" class="inp" type="password" placeholder="sk-or-..." autocomplete="off" spellcheck="false">
+        <button class="showbtn" id="showORKey" title="Show/hide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label class="lb" for="orModelInput">Model <span class="hint">- any id from openrouter.ai/models</span></label>
+        <input id="orModelInput" class="inp" list="orModels" value="openai/gpt-4o-mini" autocomplete="off" spellcheck="false">
+        <datalist id="orModels">
+          <option value="openai/gpt-4o-mini"></option>
+          <option value="openai/gpt-4o"></option>
+          <option value="openai/gpt-4.1-mini"></option>
+          <option value="anthropic/claude-3.5-sonnet"></option>
+          <option value="google/gemini-2.0-flash-001"></option>
+          <option value="deepseek/deepseek-chat-v3-0324:free"></option>
+        </datalist>
+      </div>
+      <div class="mrow">
+        <button class="mbtn primary" id="saveORKey">Save and test</button>
+        <button class="mbtn ghost" id="clearORKey">Clear</button>
+      </div>
+      <div class="mstatus muted" id="orstatus">not connected.</div>
     </div>
-    <p class="mnote">your key is stored only in this browser (localStorage) and is sent straight to Google when you generate, never to me or any other server. the free tier has daily limits, so if you see a quota error just wait a bit or switch to flash-lite.</p>
+
+    <p class="mnote">keys live only in this browser (localStorage). both providers allow direct browser calls, so there is no server in the middle. GPT usage on OpenRouter costs a small amount of credits, gemini flash is free.</p>
   </div>
 </div>
 
@@ -397,7 +436,7 @@
 (function(){
   "use strict";
 
-  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", key:"", model:"gemini-3.5-flash", models:[], busy:false };
+  var state = { fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-4o-mini", busy:false };
   var $ = function(id){ return document.getElementById(id); };
   function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
   function splitPoints(str){ return (str||"").split("\n").map(function(s){ return s.replace(/^[\-\*•→\d.\)\s]+/,"").trim(); }).filter(Boolean); }
@@ -583,14 +622,13 @@
     var h=($("handle").value||"@yourhandle").replace(/^@+/,"")||"yourhandle";
 
     if(state.engine==="ai"){
-      if(!state.key){ openSettings(); showError("add a gemini key to use the AI writer, or switch to templates."); return; }
+      if(!currentKey()){ openSettings(); showError("add a "+(state.provider==="openrouter"?"OpenRouter":"Gemini")+" key in settings, or switch to templates."); return; }
       state.gen++;
       setBusy(true);
       var prompt=buildAIPrompt(topic,f,h);
-      generateWithFallback(prompt, modelCandidates(), 0).then(function(res){
-        state.tweets=res.posts.map(sanitize).filter(Boolean);
+      aiGenerate(prompt).then(function(posts){
+        state.tweets=posts.map(sanitize).filter(Boolean);
         if(!state.tweets.length) throw new Error("the model returned an empty post, try again");
-        if(res.model!==state.model){ state.model=res.model; savePrefs(); reflectEngine(); var ms=$("modelSel"); if(ms) ms.value=res.model; }
         renderTweets(); runSignal();
       }).catch(function(err){
         showError((err&&err.message)?err.message:"generation failed");
@@ -647,6 +685,16 @@
     return L.join("\n");
   }
 
+  function currentKey(){ return state.provider==="openrouter" ? state.orKey : state.key; }
+  function parsePosts(text){
+    text=String(text||"").trim();
+    text=text.replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"").trim();
+    var posts=null;
+    try{ var p=JSON.parse(text); if(p&&p.posts) posts=p.posts; else if(Array.isArray(p)) posts=p; }catch(e){}
+    if(!posts){ var mm=text.match(/\{[\s\S]*\}/); if(mm){ try{ var p2=JSON.parse(mm[0]); if(p2&&p2.posts) posts=p2.posts; }catch(e){} } }
+    if(!posts||!posts.length){ if(!text) throw new Error("the model returned an empty response, try again"); posts=[text]; }
+    return posts.map(function(x){return String(x);});
+  }
   function modelCandidates(){
     var avail=state.models||[], list=[];
     function add(id){ if(id && list.indexOf(id)===-1 && (!avail.length || avail.indexOf(id)>-1)) list.push(id); }
@@ -656,7 +704,7 @@
     avail.filter(function(x){return /flash/.test(x)&&!/^gemini-2\./.test(x);}).forEach(add);
     return list.slice(0,5);
   }
-  function isUnavailable(err){ return !!(err && /404|not found|not available|no longer available|not_found|is not supported/i.test(err.message||"")); }
+  function isUnavailable(err){ return !!(err && (err.status===404 || /404|not found|not available|no longer available|not_found|is not supported/i.test(err.message||""))); }
   function generateWithFallback(prompt, candidates, i){
     var model=candidates[i];
     if(!model) return Promise.reject(new Error("none of your available models accepted the request. open settings and pick a different model."));
@@ -673,20 +721,41 @@
         responseSchema:{ type:"OBJECT", properties:{ posts:{ type:"ARRAY", items:{ type:"STRING" } } }, required:["posts"] } } };
     return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){
       return r.json().catch(function(){return null;}).then(function(data){
-        if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")"); if(r.status===429) m="hit the free-tier rate limit. wait a minute, or switch to gemini-2.5-flash-lite in settings for higher limits."; throw new Error(m); }
+        if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")"); if(r.status===429) m="hit the free-tier rate limit. wait a minute, or switch to gemini-3.1-flash-lite in settings."; var ge=new Error(m); ge.status=r.status; throw ge; }
         if(!data) throw new Error("could not read the response");
         if(data.promptFeedback&&data.promptFeedback.blockReason) throw new Error("blocked by a safety filter ("+data.promptFeedback.blockReason+"). try rephrasing the topic.");
         if(!data.candidates||!data.candidates.length) throw new Error("the model returned no content, try again");
         var cand=data.candidates[0];
         var text=(cand.content&&cand.content.parts)?cand.content.parts.map(function(p){return p.text||"";}).join(""):"";
         if(!text && cand.finishReason && cand.finishReason!=="STOP") throw new Error("model stopped early ("+cand.finishReason+"), try again or shorten the request");
-        var posts=null; try{ var parsed=JSON.parse(text); if(parsed&&parsed.posts) posts=parsed.posts; }catch(e){}
-        if(!posts||!posts.length){ text=String(text).trim(); if(!text) throw new Error("the model returned an empty response, try again"); posts=[text]; }
-        return posts.map(function(x){return String(x);});
+        return parsePosts(text);
       });
     });
   }
 
+  function callOpenRouter(promptText, model, key){
+    var body={ model:model||"openai/gpt-4o-mini", temperature:1, messages:[{role:"user",content:promptText}], response_format:{type:"json_object"} };
+    return fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key,"HTTP-Referer":location.origin,"X-Title":"PostLab"},body:JSON.stringify(body)}).then(function(r){
+      return r.json().catch(function(){return null;}).then(function(data){
+        if(!r.ok){ var m=data&&data.error&&data.error.message?data.error.message:("request failed (HTTP "+r.status+")");
+          if(r.status===401) m="that OpenRouter key was rejected, check it in settings.";
+          if(r.status===402) m="this model needs OpenRouter credits. add credits, or pick a free model (id ending in :free).";
+          if(r.status===429) m="rate limited, wait a moment and try again.";
+          throw new Error(m); }
+        if(!data) throw new Error("could not read the response");
+        if(!data.choices||!data.choices.length) throw new Error((data.error&&data.error.message)||"the model returned no content, try again");
+        var msg=data.choices[0].message||{};
+        return parsePosts(msg.content||"");
+      });
+    });
+  }
+  function aiGenerate(promptText){
+    if(state.provider==="openrouter") return callOpenRouter(promptText, state.orModel, state.orKey);
+    return generateWithFallback(promptText, modelCandidates(), 0).then(function(res){
+      if(res.model!==state.model){ state.model=res.model; savePrefs(); reflectEngine(); var ms=$("modelSel"); if(ms) ms.value=res.model; }
+      return res.posts;
+    });
+  }
   function renderTweets(){
     clearError();
     var wrap=$("tweets"); wrap.innerHTML="";
@@ -796,7 +865,7 @@
   function legacyCopy(text){ var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); }
   function copyThread(){ copyText(domTweets().join("\n\n"), $("copyAll")); }
 
-  function openSettings(){ $("keyInput").value=state.key||""; $("modelSel").value=state.model||"gemini-2.5-flash"; $("modal").classList.add("open"); }
+  function openSettings(){ $("keyInput").value=state.key||""; $("modelSel").value=state.model||"gemini-3.5-flash"; if($("orKeyInput")){ $("orKeyInput").value=state.orKey||""; $("orModelInput").value=state.orModel||"openai/gpt-4o-mini"; } reflectProvider(); $("modal").classList.add("open"); }
   function closeSettings(){ $("modal").classList.remove("open"); }
   function mstatus(msg,kind){ var el=$("mstatus"); el.textContent=msg; el.className="mstatus "+(kind||"muted"); }
   function testKey(){
@@ -824,7 +893,7 @@
     if(ids.indexOf(prev)>-1 && !/^gemini-2\./.test(prev)) sel.value=prev; else { sel.value=sorted[0]; state.model=sorted[0]; }
   }
   function setEngine(eng){
-    if(eng==="ai" && !state.key){ setEngineButtons("template"); openSettings(); return; }
+    if(eng==="ai" && !currentKey()){ setEngineButtons("template"); openSettings(); return; }
     state.engine=eng; setEngineButtons(eng); reflectEngine(); savePrefs();
   }
   function setEngineButtons(eng){ Array.prototype.forEach.call(document.querySelectorAll("#engineSeg button"), function(b){ b.setAttribute("aria-selected", b.dataset.eng===eng?"true":"false"); }); }
@@ -832,11 +901,28 @@
     var ai=state.engine==="ai";
     $("engDot").className="dot"+(ai?" on":"");
     $("engLabel").textContent= ai ? "AI on" : "Templates";
+    var who=state.provider==="openrouter" ? (state.orModel||"gpt") : (state.model||"gemini");
     $("modeHint").innerHTML = ai
-      ? "gemini writes each post fresh for your topic using <b>"+ (state.model||"gemini") +"</b>. your key, your call."
-      : "free and instant, runs offline from a proven set of viral structures. add a gemini key in <b>settings</b> for fresh AI writing.";
+      ? "writing each post fresh with <b>"+escapeHtml(who)+"</b>. your key, your call."
+      : "free and instant, runs offline from a proven set of viral structures. add a key in <b>settings</b> for fresh AI writing.";
   }
 
+  function setProvider(p){ state.provider=p; savePrefs(); reflectProvider(); reflectEngine(); }
+  function reflectProvider(){
+    Array.prototype.forEach.call(document.querySelectorAll("#providerSeg button"), function(b){ b.setAttribute("aria-selected", b.dataset.prov===state.provider?"true":"false"); });
+    var g=$("provGemini"), o=$("provOR"); if(g) g.hidden=state.provider!=="gemini"; if(o) o.hidden=state.provider!=="openrouter";
+  }
+  function orstatus(msg,kind){ var el=$("orstatus"); if(el){ el.textContent=msg; el.className="mstatus "+(kind||"muted"); } }
+  function testORKey(){
+    var k=$("orKeyInput").value.trim();
+    if(!k){ orstatus("paste a key first.","bad"); return; }
+    var model=$("orModelInput").value.trim()||"openai/gpt-4o-mini";
+    orstatus("checking "+model+"...","muted"); $("saveORKey").disabled=true;
+    callOpenRouter('reply with json {"posts":["ok"]}', model, k).then(function(){
+      state.orKey=k; state.orModel=model; setProvider("openrouter"); setEngine("ai");
+      orstatus("connected. using "+model+".","good"); toast("OpenRouter connected");
+    }).catch(function(err){ orstatus((err&&err.message)?err.message:"could not connect","bad"); }).then(function(){ $("saveORKey").disabled=false; });
+  }
   function toast(msg){ var t=$("toast"); $("toastMsg").textContent=msg; t.classList.add("show"); clearTimeout(t._tm); t._tm=setTimeout(function(){ t.classList.remove("show"); },1500); }
   function copyIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }
   function checkIcon(){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'; }
@@ -866,12 +952,15 @@
       var sm=localStorage.getItem("postlab-model")||"gemini-3.5-flash";
       if(/^gemini-2\./.test(sm)) sm="gemini-3.5-flash";
       state.model=sm;
+      state.orKey=localStorage.getItem("postlab-or-key")||"";
+      state.orModel=localStorage.getItem("postlab-or-model")||"openai/gpt-4o-mini";
+      state.provider=localStorage.getItem("postlab-provider")||"gemini";
       var eng=localStorage.getItem("postlab-engine");
-      state.engine= eng ? eng : (state.key?"ai":"template");
-      if(state.engine==="ai" && !state.key) state.engine="template";
+      state.engine= eng ? eng : (currentKey()?"ai":"template");
+      if(state.engine==="ai" && !currentKey()) state.engine="template";
     }catch(e){}
   }
-  function savePrefs(){ try{ localStorage.setItem("postlab-gemini-key",state.key||""); localStorage.setItem("postlab-model",state.model||"gemini-3.5-flash"); localStorage.setItem("postlab-engine",state.engine); }catch(e){} }
+  function savePrefs(){ try{ localStorage.setItem("postlab-gemini-key",state.key||""); localStorage.setItem("postlab-model",state.model||"gemini-3.5-flash"); localStorage.setItem("postlab-or-key",state.orKey||""); localStorage.setItem("postlab-or-model",state.orModel||"openai/gpt-4o-mini"); localStorage.setItem("postlab-provider",state.provider||"gemini"); localStorage.setItem("postlab-engine",state.engine); }catch(e){} }
 
   function init(){
     try{ var s=localStorage.getItem("postlab-theme"); if(s) document.documentElement.setAttribute("data-theme",s); }catch(e){}
@@ -898,9 +987,14 @@
     $("clearKey").addEventListener("click", function(){ state.key=""; $("keyInput").value=""; setEngine("template"); savePrefs(); mstatus("key cleared. using templates.","muted"); });
     $("showKey").addEventListener("click", function(){ var k=$("keyInput"); k.type = k.type==="password" ? "text":"password"; });
     $("modelSel").addEventListener("change", function(){ state.model=this.value; savePrefs(); reflectEngine(); });
+    Array.prototype.forEach.call(document.querySelectorAll("#providerSeg button"), function(b){ b.addEventListener("click", function(){ setProvider(b.dataset.prov); }); });
+    $("saveORKey").addEventListener("click", testORKey);
+    $("clearORKey").addEventListener("click", function(){ state.orKey=""; $("orKeyInput").value=""; if(state.provider==="openrouter") setEngine("template"); savePrefs(); orstatus("key cleared.","muted"); });
+    $("showORKey").addEventListener("click", function(){ var k=$("orKeyInput"); k.type=k.type==="password"?"text":"password"; });
+    $("orModelInput").addEventListener("change", function(){ state.orModel=this.value.trim()||"openai/gpt-4o-mini"; savePrefs(); reflectEngine(); });
     if(window.matchMedia){ try{ window.matchMedia("(prefers-color-scheme:dark)").addEventListener("change", syncThemeBtn); }catch(e){} }
 
-    setEngineButtons(state.engine); reflectEngine();
+    setEngineButtons(state.engine); reflectProvider(); reflectEngine();
     renderTemplateOptions(); setAvatar();
     $("topic").value="building an audience on X";
     seedExample();
