@@ -194,6 +194,18 @@
   .mini svg{width:13px;height:13px}
   .mini.done{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%, transparent)}
 
+  .suggest-btn{margin-top:12px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;border-radius:11px;
+    border:1.5px dashed color-mix(in srgb,var(--accent) 55%, transparent);background:color-mix(in srgb,var(--accent) 8%, transparent);
+    color:var(--accent-text);font-weight:700;font-size:13.5px;cursor:pointer;transition:background .15s,border-color .15s}
+  .suggest-btn:hover{background:color-mix(in srgb,var(--accent) 15%, transparent)}
+  .suggest-btn[disabled]{opacity:.6;cursor:default}
+  .suggest-btn svg{width:16px;height:16px}
+  .suggest-card{margin-top:10px;border:1.5px solid color-mix(in srgb,var(--accent) 45%, transparent);border-radius:14px;background:var(--bg-3);padding:12px 13px}
+  .suggest-card .sg-t{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);margin-bottom:7px}
+  .suggest-card .sg-t span{display:block;text-transform:none;letter-spacing:0;font-weight:500;color:var(--faint);font-size:11.5px;margin-top:2px}
+  .suggest-card .sg-b{white-space:pre-wrap;word-break:break-word;font-size:15px;line-height:1.5;color:var(--text)}
+  .suggest-card .sg-a{display:flex;gap:8px;margin-top:10px;padding-top:9px;border-top:1px solid var(--line-soft)}
+  .suggest-card .sg-a .mini{margin-left:0}
   .reply-hint{margin-top:12px;background:var(--good-bg);border:1px dashed color-mix(in srgb,var(--good) 40%, transparent);border-radius:12px;padding:11px 13px}
   .reply-hint .rh-t{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--good);margin-bottom:5px;display:flex;align-items:center;gap:6px}
   .reply-hint .rh-t svg{width:13px;height:13px}
@@ -384,6 +396,17 @@
         </div>
         <div class="tweets" id="tweets"></div>
         <div id="replyHint"></div>
+        <div id="suggestWrap" hidden>
+          <button class="suggest-btn" id="suggestBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15z"/></svg><span id="suggestLabel">Suggest a higher-reach remix</span></button>
+          <div class="suggest-card" id="suggestCard" hidden>
+            <div class="sg-t">suggested remix <span>same facts, tuned for replies. your original above stays untouched.</span></div>
+            <div class="sg-b" id="suggestText"></div>
+            <div class="sg-a">
+              <button class="mini" id="sgCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy</span></button>
+              <button class="mini" id="sgUse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Use this instead</span></button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="panel sig">
@@ -482,7 +505,7 @@
 (function(){
   "use strict";
 
-  var state = { mode:"post", fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-oss-20b:free", busy:false };
+  var state = { mode:"post", kind:"post", fmt:"single", tmplId:null, gen:0, tweets:[], link:"", engine:"template", provider:"gemini", key:"", model:"gemini-3.5-flash", models:[], orKey:"", orModel:"openai/gpt-oss-20b:free", busy:false };
   var oppImg=null; // {mime, data} of the pasted screenshot
   var $ = function(id){ return document.getElementById(id); };
   function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
@@ -686,6 +709,7 @@
 
   function generate(){
     if(state.mode==="opp"){ generateOpp(); return; }
+    state.kind="post";
     var topic=$("topic").value.trim();
     if(!topic){ var ti=$("topic"); ti.classList.remove("shake"); void ti.offsetWidth; ti.classList.add("shake"); ti.focus(); return; }
     if(state.busy) return;
@@ -719,6 +743,7 @@
 
   function seedExample(){
     var topic=$("topic").value.trim(); if(!topic) return;
+    state.kind="post";
     state.gen++;
     var f=collectFields(); state.link=f.link||"";
     var h=($("handle").value||"@yourhandle").replace(/^@+/,"")||"yourhandle";
@@ -795,6 +820,7 @@
     L.push("- if pay isn't stated in the source, drop the ({pay}) part. NEVER invent pay, company names, or numbers that aren't in the source.");
     L.push("- if the source has nothing for a section, drop that section rather than making something up.");
     L.push("- keep every line short and plain. no hashtags, no em dashes or en dashes, no corporate fluff words.");
+    L.push("- banned words, never use these even if the source does: robust, seamless, comprehensive, leverage, utilize, delve, elevate, unlock, cutting-edge, game-changer. pick a plainer word instead.");
     L.push("- do NOT put the application link inside the post text. return it separately.");
     if(rawText){ L.push(""); L.push("the text of the opportunity:"); L.push(rawText); }
     L.push("");
@@ -836,6 +862,7 @@
         var clean=posts.map(sanitize).filter(Boolean);
         if(!clean.length) throw new Error("the model returned an empty post, try again");
         state.link=linkOverride||extracted||"";
+        state.kind="opp";
         state.tweets=[clean[0]]; // opportunity is always one post
         renderTweets(); runSignal();
       }).catch(function(err){ showError((err&&err.message)?err.message:"generation failed"); }).then(function(){ setBusy(false); });
@@ -847,6 +874,7 @@
     var skills=$("oppSkills").value, inc=$("oppIncludes").value;
     if(!role && !splitPoints(skills).length){ showError("give me a screenshot, the text of the opportunity, or open 'fill it in manually'."); return; }
     state.link=linkOverride||"";
+    state.kind="opp";
     state.tweets=[sanitize(buildOppManual(role,pay,skills,inc))];
     renderTweets(); runSignal();
   }
@@ -862,6 +890,43 @@
   function clearOppImg(){ oppImg=null; $("dzPreview").hidden=true; $("dzPreview").removeAttribute("src"); $("dzEmpty").hidden=false; $("dzClear").hidden=true; }
   function fileToImg(file){ if(!file || String(file.type).indexOf("image/")!==0) return; var r=new FileReader(); r.onload=function(){ setOppImg(String(r.result)); }; r.readAsDataURL(file); }
 
+  function buildRemixPrompt(post){
+    var L=[];
+    L.push("below is a hiring post for X in a fixed format. i'm keeping it as my main version, so do not edit it. instead, write ONE alternative 'reach remix' of it.");
+    L.push("");
+    L.push("the post:");
+    L.push(post);
+    L.push("");
+    L.push("rules for the remix:");
+    L.push("- keep every fact exactly: role, pay, every skill, every work item, the remote/contract terms. invent nothing.");
+    L.push("- you may open with one short scroll-stopping line before the headline, tighten the bullets, and end with a line that pulls replies, like asking people to tag someone who fits.");
+    L.push("- keep it under 270 characters total, keep the line breaks and scannability, no hashtags, no links in the post.");
+    L.push("- never use an em dash or en dash. banned words: robust, seamless, comprehensive, leverage, utilize, delve, elevate, unlock, cutting-edge, game-changer.");
+    L.push("- sound like a person, not a brand. lowercase is fine.");
+    L.push("");
+    L.push('return json only: {"posts":["the remix"]} with exactly one string.');
+    return L.join("\n");
+  }
+  function makeSuggestion(){
+    if(state.busy) return;
+    var orig=domTweets()[0]; if(!orig) return;
+    var btn=$("suggestBtn"); btn.disabled=true; $("suggestLabel").textContent="thinking...";
+    aiGenerate(buildRemixPrompt(orig)).then(function(posts){
+      var s=sanitize(posts[0]||"");
+      if(!s) throw new Error("empty remix, try again");
+      $("suggestText").textContent=s;
+      $("suggestCard").hidden=false;
+    }).catch(function(err){
+      toast(((err&&err.message)||"remix failed").slice(0,70));
+    }).then(function(){ btn.disabled=false; $("suggestLabel").textContent="Suggest a higher-reach remix"; });
+  }
+  function useSuggestion(){
+    var s=$("suggestText").textContent.trim(); if(!s) return;
+    state.kind="post"; // the remix has a hook and reply pull, judge it by the normal rubric
+    state.tweets=[s];
+    renderTweets(); runSignal();
+    toast("Swapped in the remix");
+  }
   function setMode(m){
     state.mode=m;
     Array.prototype.forEach.call(document.querySelectorAll("#modeSeg button"), function(b){ b.setAttribute("aria-selected", b.dataset.mode===m?"true":"false"); });
@@ -1001,6 +1066,9 @@
       box.innerHTML="<div class='rh-t'>"+plusIcon()+"post it, then reply with this</div><div class='rh-b'>here's the link 👇\n"+escapeHtml(state.link)+"</div>";
       rh.appendChild(box);
     }
+    // remix suggestions: opportunity posts only, needs an AI key. fresh render clears the old card.
+    $("suggestWrap").hidden = !(state.kind==="opp" && currentKey());
+    $("suggestCard").hidden = true;
   }
   function onEdit(e){ var tx=e.target; var cc=tx.parentNode.querySelector(".cc"); updateCount(tx,cc); scheduleSignal(); }
   function updateCount(tx, cc){ var n=tx.innerText.replace(/​/g,"").length; cc.textContent=n+" / 280"; cc.className="cc"+(n>280?" bad":(n>265?" warn":"")); }
@@ -1032,6 +1100,7 @@
   function domTweets(){ return Array.prototype.map.call(document.querySelectorAll("#tweets .ttext"), function(n){ return n.innerText.replace(/​/g,""); }); }
   function runSignal(){
     var tweets=domTweets(); if(!tweets.length){ return; }
+    if(state.kind==="opp"){ runSignalOpp(tweets); return; }
     var full=tweets.join("\n"), lower=full.toLowerCase(), first=tweets[0], checks=[], score=52;
     var hookLen=first.replace(/\s+/g," ").trim().length;
     if(hookLen>0 && hookLen<=210){ score+=12; checks.push(ok("Hook lands fast","the first line does the work before anyone taps 'show more'.")); }
@@ -1057,6 +1126,30 @@
     BANNED.forEach(function(w){ if(lower.indexOf(w)>-1) hits.push('"'+w+'"'); });
     if(hits.length){ score-=6; checks.push(bad("Reads AI-written","found "+hits.slice(0,3).join(", ")+". swap it out, that is the giveaway you asked to avoid.")); }
     else { score+=6; checks.push(ok("Clean of AI tells","no em dashes, no robot words. this reads like a person typed it.")); }
+    score=Math.max(0,Math.min(100,Math.round(score)));
+    paintScore(score);
+    var box=$("checks"); box.innerHTML=""; checks.forEach(function(c){ box.appendChild(c); });
+  }
+  // hiring posts are judged on scannability and repostability, not reply-bait. different rubric.
+  function runSignalOpp(tweets){
+    var p=tweets[0], lower=p.toLowerCase(), checks=[], score=50;
+    var firstLine=(p.split("\n")[0]||"").trim();
+    if(/^\[/.test(firstLine) && firstLine.length<=72){ score+=14; checks.push(ok("Headline scans in one glance","the bracketed role plus pay is the whole pitch before anyone taps 'show more'.")); }
+    else { checks.push(warn("Headline could be tighter","lead with [Hiring Role ($pay)] in brackets, that's what makes people stop.")); }
+    if(p.indexOf("•")>-1 && p.indexOf("→")>-1){ score+=12; checks.push(ok("Scannable structure","bullets and arrows get skimmed in seconds and reposted into other people's networks.")); }
+    else { checks.push(warn("Add structure","• for skills and → for the work makes it skimmable, which is what earns reposts.")); }
+    var linkRe=/(https?:\/\/|www\.|\b[a-z0-9-]+\.(com|io|ai|co|org|net|dev|xyz|app|gg)\b)/i;
+    if(linkRe.test(p)){ score-=16; checks.push(bad("Link is in the post","move it to the first reply, links in the post get reach suppressed.")); }
+    else if(state.link){ score+=8; checks.push(ok("Link staged for the first reply","exactly where it belongs, reach stays intact.")); }
+    if(p.length<=280){ score+=8; checks.push(ok("Fits a free account",p.length+" characters, posts whole without premium.")); }
+    else { checks.push(warn("Over 280 characters","trim a bullet, or it truncates for non-premium viewers.")); }
+    var tags=(p.match(/#\w+/g)||[]).length;
+    if(tags>1){ score-=6; checks.push(warn(tags+" hashtags","hiring posts don't need them, they read as spam.")); }
+    var hits=[]; if(/[—–]/.test(p)) hits.push("em dash");
+    BANNED.forEach(function(w){ if(lower.indexOf(w)>-1) hits.push('"'+w+'"'); });
+    if(hits.length){ score-=8; checks.push(bad("Reads AI-written","found "+hits.slice(0,3).join(", ")+". swap that word for a plainer one, it's the giveaway.")); }
+    else { score+=8; checks.push(ok("Clean of AI tells","no em dashes, no robot words. reads like a person typed it.")); }
+    if(!/\?|tag someone|know someone|know anyone/i.test(lower)){ checks.push(warn("Optional: a reply pull","a closing line like 'know someone who fits? tag them' travels further. try Suggest a remix below, your original stays as is.")); }
     score=Math.max(0,Math.min(100,Math.round(score)));
     paintScore(score);
     var box=$("checks"); box.innerHTML=""; checks.forEach(function(c){ box.appendChild(c); });
@@ -1194,6 +1287,9 @@
     dz.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); $("dzFile").click(); } });
     $("dzFile").addEventListener("change", function(){ fileToImg(this.files&&this.files[0]); this.value=""; });
     $("dzClear").addEventListener("click", function(e){ e.stopPropagation(); clearOppImg(); });
+    $("suggestBtn").addEventListener("click", makeSuggestion);
+    $("sgCopy").addEventListener("click", function(){ copyText($("suggestText").innerText, this); });
+    $("sgUse").addEventListener("click", useSuggestion);
     ["dragover","dragenter"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add("drag"); }); });
     ["dragleave","drop"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove("drag"); }); });
     dz.addEventListener("drop", function(e){ var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; fileToImg(f); });
