@@ -628,8 +628,11 @@
       setBusy(true);
       var prompt=buildAIPrompt(topic,f,h);
       aiGenerate(prompt).then(function(posts){
-        state.tweets=posts.map(sanitize).filter(Boolean);
-        if(!state.tweets.length) throw new Error("the model returned an empty post, try again");
+        posts=posts.map(sanitize).filter(Boolean);
+        if(!posts.length) throw new Error("the model returned an empty post, try again");
+        return tightenLongPosts(posts);
+      }).then(function(posts){
+        state.tweets=posts;
         renderTweets(); runSignal();
       }).catch(function(err){
         showError((err&&err.message)?err.message:"generation failed");
@@ -675,6 +678,12 @@
     L.push("- write to earn replies and reposts, not likes. "+(isThread?"give each post its own first-line hook.":"end on something people want to reply to."));
     L.push("- one clear idea. specifics beat adjectives. no vague filler.");
     L.push("- at most one hashtag, ideally none. never write in all caps.");
+    L.push("");
+    L.push("formatting, this decides reach as much as the words do:");
+    L.push("- length: aim for 180 to 250 characters "+(isThread?"per post":"total")+". 280 is a hard ceiling, going over it kills the post. shorter and punchier always beats longer.");
+    L.push("- never write one dense paragraph. X is read on phones, whitespace is the design.");
+    L.push("- put real line breaks inside the post string (\\n). the shape that works: a short hook line, a blank line, 2 or 3 punchy lines each on their own line, a blank line, then a closing line that invites a reply.");
+    L.push("- sentences stay short. if a line runs past 12 words, break it.");
     L.push("");
     L.push("voice rules, these matter a lot:");
     L.push("- sound like a real person. lowercase is fine, use contractions, vary sentence length, be a little blunt.");
@@ -761,6 +770,26 @@
       if(res.model!==state.model){ state.model=res.model; savePrefs(); reflectEngine(); var ms=$("modelSel"); if(ms) ms.value=res.model; }
       return res.posts;
     });
+  }
+  // models can't count characters. if anything comes back over 280, send it once for a compression rewrite.
+  function tightenLongPosts(posts, depth){
+    depth=depth||0;
+    var long=posts.filter(function(p){return p.length>280;});
+    if(!long.length || depth>=2) return Promise.resolve(posts);
+    var rp=[];
+    rp.push("these X posts are over the 280 character limit. rewrite EACH one to under 220 characters. that is not a suggestion, drop a whole sentence if you must.");
+    rp.push("keep: the hook, the line-break shape (short lines, blank lines between thoughts), the blunt human voice, the closing line that invites a reply.");
+    rp.push("cut: whole sentences, weaker points, filler. do not just trim words from every line.");
+    rp.push("never use an em dash or en dash. no hashtags.");
+    rp.push("");
+    posts.forEach(function(p,i){ rp.push("post "+(i+1)+" ("+p.length+" chars"+(p.length>280?", TOO LONG":", fine, return unchanged")+"):"); rp.push(p); rp.push(""); });
+    rp.push("return json only, {\"posts\":[...]} with exactly "+posts.length+" strings in the same order.");
+    return aiGenerate(rp.join("\n")).then(function(fixed){
+      fixed=fixed.map(sanitize).filter(Boolean);
+      if(fixed.length!==posts.length) return posts;
+      if(fixed.every(function(p){return p.length<=280;})) return fixed;
+      return tightenLongPosts(fixed, depth+1); // one more squeeze, then let the counters flag whatever survives
+    }).catch(function(){ return posts; });
   }
   function renderTweets(){
     clearError();
