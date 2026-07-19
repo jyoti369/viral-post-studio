@@ -822,7 +822,7 @@
     L.push("- keep every line short and plain. no hashtags, no em dashes or en dashes, no corporate fluff words.");
     L.push("- banned words, never use these even if the source does: robust, seamless, comprehensive, leverage, utilize, delve, elevate, unlock, cutting-edge, game-changer. pick a plainer word instead.");
     L.push("- voice: i am NOT the company hiring. i'm sharing an opportunity i found. never write 'we', 'our team', 'join us', or anything that sounds like the employer talking. neutral lines like 'Remote contract work.' are exactly right.");
-    L.push("- do NOT put the application link inside the post text. return it separately.");
+    L.push("- hunt for the application link: an 'apply at' line, a url, a short link like t.mercor.com/xxxx or lnkd.in/xxxx, anywhere in the source. copy it EXACTLY as written, character for character. do NOT put it inside the post text, return it in the json link field. if there's truly no link, return an empty string.");
     if(rawText){ L.push(""); L.push("the text of the opportunity:"); L.push(rawText); }
     L.push("");
     L.push("return json only: {\"posts\":[\"the finished post\"], \"link\":\"the application url if you saw one, else an empty string\"}");
@@ -863,6 +863,7 @@
         var clean=posts.map(sanitize).filter(Boolean);
         if(!clean.length) throw new Error("the model returned an empty post, try again");
         state.link=linkOverride||extracted||"";
+        if(!linkOverride && extracted){ $("oppLink").value=extracted; toast("apply link picked from the screenshot"); }
         state.kind="opp";
         state.tweets=[clean[0]]; // opportunity is always one post
         renderTweets(); runSignal();
@@ -1078,6 +1079,13 @@
   function onEdit(e){ var tx=e.target; var cc=tx.parentNode.querySelector(".cc"); updateCount(tx,cc); scheduleSignal(); }
   function updateCount(tx, cc){ var n=tx.innerText.replace(/​/g,"").length; cc.textContent=n+" / 280"; cc.className="cc"+(n>280?" bad":(n>265?" warn":"")); }
 
+  function resetSignal(){
+    $("scoreNum").textContent="-";
+    $("scoreBand").textContent="scoring..."; $("scoreBand").style.color="var(--faint)";
+    $("scoreSub").textContent="the check runs once the post is written";
+    var fill=$("meterFill"); fill.style.width="0%";
+    $("checks").innerHTML="";
+  }
   function setBusy(on){
     state.busy=on;
     $("genBtn").disabled=on; $("shuffleBtn").disabled=on;
@@ -1088,6 +1096,8 @@
       var writer = state.provider==="openrouter" ? String(state.orModel||"the model").split("/").pop().replace(/:free$/,"") : (state.model||"gemini");
       $("tweets").innerHTML="<div class='skel-note'><span class='spin' style='border-color:color-mix(in srgb,var(--accent) 40%,transparent);border-top-color:var(--accent)'></span>"+escapeHtml(writer)+" is writing this...</div><div class='skelwrap'><div class='skel'></div><div class='skel'></div><div class='skel short'></div></div>";
       $("threadTools").hidden=true; $("replyHint").innerHTML="";
+      $("suggestWrap").hidden=true;
+      resetSignal(); // the old score belongs to the old post, blank it while writing
     }
   }
   function showError(msg){
