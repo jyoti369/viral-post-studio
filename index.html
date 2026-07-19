@@ -821,6 +821,7 @@
     L.push("- if the source has nothing for a section, drop that section rather than making something up.");
     L.push("- keep every line short and plain. no hashtags, no em dashes or en dashes, no corporate fluff words.");
     L.push("- banned words, never use these even if the source does: robust, seamless, comprehensive, leverage, utilize, delve, elevate, unlock, cutting-edge, game-changer. pick a plainer word instead.");
+    L.push("- voice: i am NOT the company hiring. i'm sharing an opportunity i found. never write 'we', 'our team', 'join us', or anything that sounds like the employer talking. neutral lines like 'Remote contract work.' are exactly right.");
     L.push("- do NOT put the application link inside the post text. return it separately.");
     if(rawText){ L.push(""); L.push("the text of the opportunity:"); L.push(rawText); }
     L.push("");
@@ -899,8 +900,10 @@
     L.push("");
     L.push("rules for the remix:");
     L.push("- keep every fact exactly: role, pay, every skill, every work item, the remote/contract terms. invent nothing.");
+    L.push("- important: i am NOT the employer. i'm passing along an opportunity i found (often with a referral link). never write 'our team', 'we', 'we're hiring', or 'join us'. sharer voice only: 'came across this one', 'solid gig for someone', 'join the team' is fine, 'join OUR team' is not.");
     L.push("- you may open with one short scroll-stopping line before the headline, tighten the bullets, and end with a line that pulls replies, like asking people to tag someone who fits.");
-    L.push("- keep it under 270 characters total, keep the line breaks and scannability, no hashtags, no links in the post.");
+    L.push("- length is a hard rule: under 240 characters total. the original is already near 280, so CUT to make room, drop a bullet if you must. going over 280 kills the post.");
+    L.push("- keep the line breaks and scannability, no hashtags, no links in the post.");
     L.push("- never use an em dash or en dash. banned words: robust, seamless, comprehensive, leverage, utilize, delve, elevate, unlock, cutting-edge, game-changer.");
     L.push("- sound like a person, not a brand. lowercase is fine.");
     L.push("");
@@ -914,7 +917,9 @@
     aiGenerate(buildRemixPrompt(orig)).then(function(posts){
       var s=sanitize(posts[0]||"");
       if(!s) throw new Error("empty remix, try again");
-      $("suggestText").textContent=s;
+      return tightenLongPosts([s]); // same auto-compression the main flow gets, models can't count
+    }).then(function(fixed){
+      $("suggestText").textContent=fixed[0];
       $("suggestCard").hidden=false;
     }).catch(function(err){
       toast(((err&&err.message)||"remix failed").slice(0,70));
